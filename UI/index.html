@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/fonts.css">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <title>MyChat</title>
+</head>
+
+<body>
+  
+
+  <header class="chat-header">
+    <div class="log-part">
+      <!-- <button class="login-btn">Log In</button> -->
+      <nav class="author-capabil">
+        <button title="Log Out" class="capabil-btn">
+          <label for="log-out">
+            <input id="log-out" type="radio" name="capabil" />
+            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.5956 16.1912C14.3134 16.1912 14.8936 15.6097 14.8936 14.8933V9.70159C14.8936 8.98644 15.475 8.40367 16.1915 8.40367L20.0852 8.40367L20.0852 27.8724C20.0852 28.9808 20.7913 29.9712 21.853 30.3398L22.2372 30.4683L16.1915 30.4683C15.475 30.4683 14.8936 29.8855 14.8936 29.1703V25.2766C14.8936 24.5601 14.3134 23.9787 13.5956 23.9787C12.8779 23.9787 12.2977 24.5601 12.2977 25.2766V29.1703C12.2977 31.3171 14.0447 33.0641 16.1915 33.0641H30.1441C30.1934 33.0641 30.2349 33.042 30.283 33.0355C30.3453 33.0407 30.405 33.0641 30.4686 33.0641C31.9002 33.0641 33.0644 31.8999 33.0644 30.4683V7.10576C33.0644 5.99734 32.3583 5.00703 31.2966 4.63842L23.4858 2.0348C23.221 1.95303 22.9575 1.91409 22.6811 1.91409C21.2495 1.91409 20.0852 3.07832 20.0852 4.50992V5.80784L16.1915 5.80784C14.0447 5.80784 12.2977 7.55484 12.2977 9.70159V14.8933C12.2977 15.6097 12.8779 16.1912 13.5956 16.1912Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M2.29467 21.0026L7.48634 26.1943C7.85754 26.5655 8.41565 26.6771 8.90107 26.4759C9.38519 26.2748 9.70188 25.801 9.70188 25.2767L9.70188 21.3829L14.8936 21.3829C15.61 21.3829 16.1915 20.8015 16.1915 20.085C16.1915 19.3686 15.61 18.7871 14.8936 18.7871L9.70188 18.7871L9.70188 14.8933C9.70188 14.369 9.38519 13.8952 8.90107 13.6941C8.41565 13.4929 7.85754 13.6045 7.48634 13.9757L2.29467 19.1674C1.78719 19.6749 1.78719 20.4951 2.29467 21.0026Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+            </svg>
+          </label>
+        </button>
+        <button title="Users Online" class="capabil-btn">
+          <label for="online-users">
+            <input id="online-users" type="radio" name="capabil">
+            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.1251 15.865H6.36822C2.85674 15.865 0 18.7217 0 22.2331V31.7553H17.4305V23.3262C17.4305 21.2821 18.7057 19.5313 20.5019 18.8243C19.3709 17.0469 17.3836 15.865 15.1251 15.865Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M10.7467 3.24463C7.78979 3.24463 5.38416 5.65026 5.38416 8.60715C5.38416 11.564 7.78979 13.9697 10.7467 13.9697C13.7036 13.9697 16.1092 11.564 16.1092 8.60715C16.1092 5.65026 13.7036 3.24463 10.7467 3.24463Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M31.545 19.8712H22.2676C20.3625 19.8712 18.8126 21.4211 18.8126 23.3262V31.7554H21.4934H35.0001V23.3262C35.0001 21.4212 33.4501 19.8712 31.545 19.8712Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M26.9062 9.78394C24.7235 9.78394 22.9478 11.5598 22.9478 13.7424C22.9478 15.9251 24.7235 17.7009 26.9062 17.7009C29.089 17.7009 30.8647 15.9251 30.8647 13.7424C30.8647 11.5597 29.089 9.78394 26.9062 9.78394Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+            </svg>
+          </label>
+        </button>
+        <button title='Direct' class="capabil-btn"> <span class="message-count">2</span>
+          <label for="direct">
+            <input id="direct" type="radio" name="capabil">
+            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M34.9791 7.23767L22.6754 17.483L35 25.6853V7.46859C35 7.38984 34.9919 7.313 34.9791 7.23767Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M21.566 18.4067L20.015 19.6983C19.2864 20.305 18.3932 20.6084 17.5001 20.6084C16.607 20.6084 15.7137 20.305 14.9851 19.6983L13.4341 18.4067L0 27.3474V27.5316C0 28.2945 0.620772 28.9153 1.38373 28.9153H33.6162C34.3792 28.9153 34.9999 28.2945 34.9999 27.5316V27.3474L21.566 18.4067Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M33.6214 6.08484C33.6197 6.08484 33.618 6.08484 33.6163 6.08484H1.38381C1.3821 6.08484 1.38046 6.08484 1.37875 6.08484C1.18338 6.08559 1.09882 6.33449 1.24894 6.45952L13.9146 17.0063C13.9161 17.0075 13.9176 17.0088 13.9191 17.01L15.8706 18.635C16.8148 19.4213 18.1855 19.4213 19.1296 18.635L33.7512 6.45952C33.9013 6.33442 33.8167 6.08552 33.6214 6.08484Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path d="M0.0208496 7.23767C0.00813477 7.313 0 7.3897 0 7.46859V25.6853L12.3246 17.483L0.0208496 7.23767Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+            </svg>
+          </label>
+        </button>
+        <button title='Main Chat' class="capabil-btn">
+          <label for="main-chat">
+            <input id="main-chat" type="radio" name="capabil">
+            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M30.6251 6.5625V17.5C30.6251 21.1181 27.6807 24.0625 24.0626 24.0625H14.3391L9.52881 28.1837C9.97506 28.3369 10.4432 28.4375 10.9376 28.4375H21.4704L28.8182 34.7375C29.0216 34.9103 29.2754 35 29.5313 35C29.6866 35 29.8441 34.9672 29.9885 34.8994C30.3779 34.7222 30.6251 34.3328 30.6251 33.9062V28.4375C33.0379 28.4375 35.0001 26.4753 35.0001 24.0625V10.9375C35.0001 8.52469 33.0379 6.5625 30.6251 6.5625Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M24.0625 0H4.375C1.96219 0 0 1.96219 0 4.375V17.5C0 19.9128 1.96219 21.875 4.375 21.875V27.3438C4.375 27.7703 4.62437 28.1597 5.01156 28.3369C5.15812 28.4047 5.31344 28.4375 5.46875 28.4375C5.72469 28.4375 5.97844 28.3478 6.17969 28.175L13.5297 21.875H24.0625C26.4753 21.875 28.4375 19.9128 28.4375 17.5V4.375C28.4375 1.96219 26.4753 0 24.0625 0ZM16.4062 13.125H7.65625C7.0525 13.125 6.5625 12.635 6.5625 12.0312C6.5625 11.4275 7.0525 10.9375 7.65625 10.9375H16.4062C17.01 10.9375 17.5 11.4275 17.5 12.0312C17.5 12.635 17.01 13.125 16.4062 13.125ZM20.7812 8.75H7.65625C7.0525 8.75 6.5625 8.26 6.5625 7.65625C6.5625 7.0525 7.0525 6.5625 7.65625 6.5625H20.7812C21.385 6.5625 21.875 7.0525 21.875 7.65625C21.875 8.26 21.385 8.75 20.7812 8.75Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+            </svg>
+          </label>
+        </button>
+        <div class="user">
+          <h3 class="user-name">kupchenya <br> aleksandr</h3>
+          <div class="user-avatar">
+            <span class="user-avatar_first-letter">K</span>
+            <span class="user-avatar_second-letter">A</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="chat-info">
+      <div class="chat-description">
+        <div class="menu-btn-wrp">
+          <button id="menu-btn" class="menu-button"></button>
+          <label class="menu-button-label" for="menu-btn"></label>
+        </div>
+
+        <div class="user-avatar">
+          <span class="user-avatar_first-letter">J</span>
+          <span class="user-avatar_second-letter">C</span>
+        </div>
+        <div class="chat-name">
+          <h4>JS Camping</h4>
+          <h5><span class="chat-member-count">22</span> members</h5>
+        </div>
+      </div>
+      <div class="chat-filter-wrp">
+        <ul class="filter-variants">
+          <li><input type="radio" name="filter" id="by-text" />
+            <input placeholder="Search by word" class="filter-input" type="text" />
+            <button class="filter-kind-btn">
+              <label for="by-text">
+                <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M4.55715 20.775C-0.189022 16.0288 -0.188925 8.30597 4.55715 3.5597C9.30342 -1.18657 17.0262 -1.18657 21.7723 3.5597C25.7989 7.58627 26.4087 13.5748 23.6034 18.2512C23.6034 18.2512 23.4019 18.5893 23.6741 18.8612C25.2266 20.4137 29.8847 25.0718 29.8847 25.0718C31.1208 26.3079 31.4151 28.0364 30.3189 29.1328L30.1302 29.3213C29.0339 30.4178 27.3053 30.1236 26.0693 28.8874C26.0693 28.8874 21.4211 24.2391 19.8717 22.6898C19.5865 22.4046 19.2485 22.6062 19.2485 22.6062C14.5722 25.4113 8.58372 24.8016 4.55715 20.775ZM19.525 18.5276C23.032 15.0206 23.0319 9.31435 19.5249 5.80735C16.0178 2.30043 10.3116 2.30034 6.8047 5.80735C3.29769 9.31426 3.29769 15.0206 6.8047 18.5276C10.3117 22.0344 16.0178 22.0344 19.525 18.5276Z"
+                    fill="white" />
+                  <path
+                    d="M15.706 16.286C15.6127 16.062 15.51 15.8053 15.398 15.516C15.2953 15.2173 15.1833 14.9047 15.062 14.578C14.782 14.5873 14.488 14.5967 14.18 14.606C13.872 14.606 13.5593 14.606 13.242 14.606C12.8407 14.606 12.4767 14.606 12.15 14.606C11.8233 14.606 11.5247 14.6013 11.254 14.592C11.142 14.9187 11.0347 15.2267 10.932 15.516C10.8293 15.8053 10.7313 16.062 10.638 16.286C10.4513 16.762 10.1807 17 9.826 17C9.69533 17 9.56933 16.958 9.448 16.874C9.336 16.79 9.28 16.6687 9.28 16.51C9.28 16.3513 9.308 16.146 9.364 15.894C9.42 15.6327 9.49 15.3573 9.574 15.068C9.66733 14.7693 9.76533 14.466 9.868 14.158C9.97067 13.8407 10.0687 13.5467 10.162 13.276C10.2553 12.9773 10.386 12.5993 10.554 12.142C10.7313 11.6753 10.918 11.19 11.114 10.686C11.31 10.182 11.506 9.68733 11.702 9.202C11.898 8.70733 12.0753 8.278 12.234 7.914C12.2713 7.82067 12.318 7.718 12.374 7.606C12.43 7.48467 12.4953 7.37267 12.57 7.27C12.654 7.16733 12.7427 7.07867 12.836 7.004C12.9387 6.92933 13.0507 6.892 13.172 6.892C13.2933 6.892 13.4053 6.934 13.508 7.018C13.6107 7.09267 13.6993 7.186 13.774 7.298C13.858 7.41 13.928 7.52667 13.984 7.648C14.0493 7.76933 14.1007 7.87667 14.138 7.97C14.2873 8.34333 14.4553 8.77267 14.642 9.258C14.838 9.74333 15.0293 10.2333 15.216 10.728C15.412 11.2227 15.594 11.694 15.762 12.142C15.93 12.59 16.0653 12.968 16.168 13.276C16.252 13.5467 16.3453 13.836 16.448 14.144C16.56 14.452 16.6627 14.7553 16.756 15.054C16.8493 15.3527 16.924 15.6327 16.98 15.894C17.0453 16.146 17.078 16.3513 17.078 16.51C17.078 16.6687 17.0173 16.79 16.896 16.874C16.784 16.958 16.6627 17 16.532 17C16.364 17 16.21 16.944 16.07 16.832C15.93 16.7107 15.8087 16.5287 15.706 16.286ZM13.228 13.206C13.452 13.206 13.676 13.2107 13.9 13.22C14.124 13.22 14.348 13.2247 14.572 13.234C14.46 12.9073 14.348 12.5807 14.236 12.254C14.124 11.9273 14.0167 11.6147 13.914 11.316C13.8207 11.0173 13.732 10.742 13.648 10.49C13.5733 10.2287 13.508 10 13.452 9.804C13.4147 9.68267 13.3727 9.58467 13.326 9.51C13.2793 9.43533 13.2187 9.398 13.144 9.398C13.0693 9.398 13.0087 9.44 12.962 9.524C12.9153 9.59867 12.8733 9.69667 12.836 9.818C12.724 10.2007 12.5653 10.7 12.36 11.316C12.164 11.9227 11.954 12.562 11.73 13.234C11.982 13.2247 12.234 13.22 12.486 13.22C12.738 13.2107 12.9853 13.206 13.228 13.206Z"
+                    fill="white" />
+                </svg>
+              </label></button>
+          </li>
+          <li>
+            <input type="radio" name="filter" id="by-user">
+            <input placeholder="Search by user" class="filter-input" type="text">
+            <button class="filter-kind-btn">
+              <label for="by-user">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M3.55959 20.775C-1.18658 16.0288 -1.18648 8.30597 3.55959 3.5597C8.30586 -1.18657 16.0287 -1.18657 20.7747 3.5597C24.8013 7.58627 25.4111 13.5748 22.6059 18.2512C22.6059 18.2512 22.4044 18.5893 22.6765 18.8612C24.2291 20.4137 28.8871 25.0718 28.8871 25.0718C30.1233 26.3079 30.4176 28.0364 29.3213 29.1328L29.1326 29.3213C28.0364 30.4178 26.3077 30.1236 25.0717 28.8874C25.0717 28.8874 20.4235 24.2391 18.8741 22.6898C18.589 22.4046 18.251 22.6062 18.251 22.6062C13.5747 25.4113 7.58616 24.8016 3.55959 20.775ZM18.5274 18.5276C22.0344 15.0206 22.0343 9.31435 18.5273 5.80735C15.0203 2.30043 9.31405 2.30034 5.80714 5.80735C2.30014 9.31426 2.30014 15.0206 5.80714 18.5276C9.31415 22.0344 15.0203 22.0344 18.5274 18.5276Z"
+                    fill="white" />
+                  <path
+                    d="M11.8356 5.93124C13.5718 5.93124 14.9844 7.34369 14.9844 9.0799C14.9844 10.8161 13.5718 12.2285 11.8356 12.2285C10.0994 12.2285 8.68688 10.8161 8.68688 9.0799C8.68688 7.34369 10.0994 5.93124 11.8356 5.93124Z"
+                    fill="white" />
+                  <path
+                    d="M9.48148 12.297C9.57368 12.3139 9.63949 12.3697 9.69641 12.4187C10.2635 12.9072 11.0325 13.034 11.8356 13.034C12.6195 13.034 13.4614 12.9385 13.9654 12.4089C14.0252 12.346 14.0806 12.3087 14.1657 12.294C14.9827 12.1527 15.4595 13.3465 15.4595 14.2248V16.357C15.4595 17.5042 14.5262 18.4374 13.379 18.4374H10.2922C9.14506 18.4374 8.21177 17.5042 8.21177 16.357V14.2248C8.21148 13.3465 8.66542 12.1487 9.48148 12.297Z"
+                    fill="white" />
+                </svg>
+
+              </label>
+            </button>
+          </li>
+          <li>
+            <input type="radio" name="filter" id="by-date">
+            <input class="filter-input" type="date">
+            <button class="filter-kind-btn">
+              <label for="by-date">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M3.55959 20.775C-1.18658 16.0288 -1.18648 8.30597 3.55959 3.5597C8.30586 -1.18657 16.0287 -1.18657 20.7747 3.5597C24.8013 7.58627 25.4111 13.5748 22.6059 18.2512C22.6059 18.2512 22.4044 18.5893 22.6765 18.8612C24.2291 20.4137 28.8871 25.0718 28.8871 25.0718C30.1233 26.3079 30.4176 28.0364 29.3213 29.1328L29.1326 29.3213C28.0364 30.4178 26.3077 30.1236 25.0717 28.8874C25.0717 28.8874 20.4235 24.2391 18.8741 22.6898C18.589 22.4046 18.251 22.6062 18.251 22.6062C13.5747 25.4113 7.58616 24.8016 3.55959 20.775ZM18.5274 18.5276C22.0344 15.0206 22.0343 9.31435 18.5273 5.80735C15.0203 2.30043 9.31405 2.30034 5.80714 5.80735C2.30014 9.31426 2.30014 15.0206 5.80714 18.5276C9.31415 22.0344 15.0203 22.0344 18.5274 18.5276Z"
+                    fill="white" />
+                  <g clip-path="url(#clip0)">
+                    <path
+                      d="M16.2809 7.54035H14.9542V7.05485C14.9542 6.74968 14.6765 6.5 14.3371 6.5C13.9977 6.5 13.72 6.74968 13.72 7.05485V7.54035H10.2951V7.05485C10.2951 6.74968 10.0174 6.5 9.67803 6.5C9.33863 6.5 9.06094 6.74968 9.06094 7.05485V7.54035H7.73419C7.05538 7.54035 6.5 8.03972 6.5 8.65006V16.3903C6.5 17.0006 7.05538 17.5 7.73419 17.5H16.2655C16.9443 17.5 17.4997 17.0006 17.4997 16.3903V8.65006C17.5151 8.03972 16.9597 7.54035 16.2809 7.54035ZM16.2655 16.3764H7.73419V11.7156H16.2655V16.3764Z"
+                      fill="white" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0">
+                      <rect width="11" height="11" fill="white" transform="translate(6.5 6.5)" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </label>
+            </button>
+          </li>
+        </ul>
+        <button class="filter-btn"></button>
+      </div>
+    </div>
+  </header>
+  <main class="chat-body">
+    <section class="list-block">
+      <h2 class="block-title">Online<span class="online-member-count">10</span></h2>
+      <div class="chats-list">
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter">U</span>
+              <span class="user-avatar_second-letter">N</span>
+            </div>
+            <div class="chat-with-who">
+              <h4>User Name</h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section class="chat-block">
+      <div class="blur-end">
+        <button id="load-msg-link">Load More Messages</button>
+      </div>
+      <div class="chat-field">
+
+        <div class="message-wrp">
+          <div class="companion-message-block">
+            <div class="companion-name">User name</div>
+            <pre
+              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
+            <div class="send-time">12:31 PM</div>
+          </div>
+        </div>
+        <div class="message-wrp me-message-wrp">
+          <div class="me-message-block">
+            <pre
+              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
+            <div class="send-time">12:32 PM</div>
+          </div>
+        </div>
+        <div class="message-wrp">
+          <div class="companion-message-block">
+            <div class="companion-name">User name</div>
+            <pre
+              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
+            <div class="send-time">12:31 PM</div>
+          </div>
+        </div>
+        <div class="message-wrp me-message-wrp">
+          <div class="msg-sett-wrp">
+            <label class="msg-sett-label">
+              <input type="radio" name="me-msg">
+              <div class="settings-modal">
+                <ul class="settings-modal-list">
+                  <li class="settings-modal-list__item">Edit</li>
+                  <li class="settings-modal-list__item">Delete</li>
+                </ul>
+              </div>
+              <buttot class="msg-sett-btn">
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+              </buttot>
+            </label>
+          </div>
+          <div class="me-message-block">
+            <pre class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit.</pre>
+            <div class="send-time">12:32 PM</div>
+          </div>
+        </div>
+        <div class="message-wrp">
+          <div class="companion-message-block">
+            <div class="companion-name">User name</div>
+            <pre class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit.</pre>
+            <div class="send-time">12:31 PM</div>
+          </div>
+        </div>
+        <div class="message-wrp me-message-wrp">
+          <div class="msg-sett-wrp">
+            <label class="msg-sett-label">
+              <input type="radio" name="me-msg">
+              <div class="settings-modal">
+                <ul class="settings-modal-list">
+                  <li class="settings-modal-list__item">Edit</li>
+                  <li class="settings-modal-list__item">Delete</li>
+                </ul>
+              </div>
+              <buttot class="msg-sett-btn">
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+              </buttot>
+            </label>
+          </div>
+          <div class="me-message-block">
+            <pre
+              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
+            <div class="send-time">12:32 PM</div>
+          </div>
+        </div>
+        <div class="message-wrp">
+          <div class="companion-message-block">
+            <div class="companion-name">User name</div>
+            <pre
+              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
+            <div class="send-time">12:31 PM</div>
+          </div>
+        </div>
+        <div class="message-wrp me-message-wrp">
+          <div class="msg-sett-wrp">
+            <label class="msg-sett-label">
+              <input type="radio" name="me-msg">
+              <div class="settings-modal">
+                <ul class="settings-modal-list">
+                  <li class="settings-modal-list__item">Edit</li>
+                  <li class="settings-modal-list__item">Delete</li>
+                </ul>
+              </div>
+              <buttot class="msg-sett-btn">
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+              </buttot>
+            </label>
+          </div>
+          <div class="me-message-block">
+            <pre
+              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
+            <div class="send-time">12:33 PM</div>
+          </div>
+        </div>
+      </div>
+      <form id="text-send-block" action="#">
+        <textarea autofocus autocomplete="off" id="text-send-input" placeholder="Type a message here..."></textarea>
+        <button id="submit-btn" type="submit"></button>
+      </form>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <ul class="footer-links">
+      <li class="footer-links__item"><a href="index.html"><span class="chat-icon"></span>MyChat</a></li>
+      <li class="footer-links__item">Created by <a target="__blank"
+          href="https://www.instagram.com/kkkupchic/">KuPcHeNyA</a></li>
+      <li class="footer-links__item"><a href="emaiil:kup4enya1999@gmail.com">kup4enya1999@gmail.com</a></li>
+      <li class="footer-links__item">Updated 21.10.2020</li>
+    </ul>
+  </footer>
+  <section class="mobile-menu-wrp">
+    <nav class="mobile-menu">
+      <div class="mobile-menu-profile">
+        <div class="user">
+          <h3 class="user-name">kupchenya <br> aleksandr</h3>
+          <div class="user-avatar">
+            <span class="user-avatar_first-letter">K</span>
+            <span class="user-avatar_second-letter">A</span>
+          </div>
+        </div>
+      </div>
+      <ul class="mobile-menu-list mobile-menu-list_signed">
+        <li><span class="message-count">1</span>Direct</li>
+        <li>Main Chat</li>
+        <li>Online Users</li>
+        <li>Sign Out</li>
+      </ul>
+      <ul class="mobile-menu-list mobile-menu-list_unsigned">
+        <li>Log In</li>
+        <li>Main Chat</li>
+        <li>Online Users</li>
+      </ul>
+      <ul class="footer-links">
+        <li class="footer-links__item"><a href="index.html"><span class="chat-icon"></span>MyChat</a></li>
+        <li class="footer-links__item">Created by <a target="__blank"
+            href="https://www.instagram.com/kkkupchic/">KuPcHeNyA</a></li>
+        <li class="footer-links__item"><a href="emaiil:kup4enya1999@gmail.com">kup4enya1999@gmail.com</a></li>
+        <li class="footer-links__item">Updated 21.10.2020</li>
+      </ul>
+
+    </nav>
+  </section>
+  <script src="script.js"></script>
+</body>
+
+</html>
