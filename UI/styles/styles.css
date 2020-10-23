@@ -253,7 +253,6 @@ input[name='filter'] {
   color: rgba(255, 255, 255, 0.6);
   font-size: var(--smallerFSize);
   transition: 0.5s;
-  /* line-height: 2.3rem; */
 }
 
 .filter-input:focus::-webkit-input-placeholder {
@@ -612,6 +611,7 @@ input[name='me-msg']:checked input[name='me-msg']:root {
 }
 
 .login-btn {
+  display: none;
   width: 100%;
   height: 3rem;
   border-radius: 10px;
