@@ -176,14 +176,16 @@ const myModule = (function () {
       flag = false;
       console.log('Object does not have all reguaired fields');
     }
-    if (msg.hasOwnProperty('isPersonal', 'to')) {
+    if (msg.hasOwnProperty('isPersonal')) {
+
       if (typeof msg.isPersonal !== 'boolean') {
         flag = false;
         console.log("Invalid isPersonal property!");
       }
-      if (typeof msg.to !== 'string' && msg.to.length === 0) {
+      if (msg.isPersonal && !(msg.hasOwnProperty('to') && typeof msg.to === 'string' && msg.to.length > 0)) {
         flag = false;
-        console.log("Invalid property of 'to' field");
+      } else if (!msg.isPersonal) {
+        msg.to = msg.isPersonal;
       }
     }
     return flag;
@@ -196,7 +198,6 @@ const myModule = (function () {
       msg.author = my;
       messages.push(msg);
       console.log('message add succsesfull');
-      console.log(messages[messages.length - 2], messages[messages.length - 1]);
       return true;
     } else {
       console.log("Message do not add. Message structure is invalid!");
@@ -211,12 +212,16 @@ const myModule = (function () {
   }
 
   function editMessage(id, msg) {
-    messages.find(item => {
-      return item.id === id;
-    }).text = msg.text; // only text?
-    return messages.find(item => {
+    let editedItem = messages.find(item => {
       return item.id === id;
     });
+    if (validateMessage(msg)) {
+      for (let key in msg) {
+        editedItem[key] = msg[key];
+      }
+      return editedItem;
+    } else return false;
+
   }
 
   function getMessage(id) {
@@ -225,8 +230,10 @@ const myModule = (function () {
     }); //.text??
   }
 
-  function getMessages(filterConfig, skip = 0, top = 10, ) {
-    let messagesFiltered = messages.slice();
+  function getMessages(skip = 0, top = 10, filterConfig = {}) {
+    let messagesFiltered = messages.slice().sort((a, b) => {
+      return a.createdAt - b.createdAt;
+    });
     for (let key in filterConfig) {
       if (key === 'author') {
         messagesFiltered = messagesFiltered.filter((item) => {
@@ -250,9 +257,7 @@ const myModule = (function () {
         });
       }
     }
-    return messagesFiltered.slice(skip, skip + top).sort((a, b) => {
-      return a.createdAt - b.createdAt;
-    });
+    return messagesFiltered.slice(skip, skip + top);
   }
 
   return {
@@ -281,13 +286,11 @@ const myModule = (function () {
 
 // console.log(myModule.getMessage('5')); //done
 // console.log(myModule.removeMessage('3')); //done
-// console.log(myModule.validateMessage(
-//   {
-//     text: '',
-//     isPersonal: true,
-//     to: 'Дарья Шурова',
-//   }
-// )); //done
+// console.log(myModule.validateMessage({
+//   text: 'f',
+//   isPersonal: true,
+//   to: '3',
+// })); //done
 // console.log(myModule.addMessage(
 //   {
 //     text: 'Работает!',
@@ -297,11 +300,24 @@ const myModule = (function () {
 // )); //done
 // console.log(myModule.addMessage(
 //   {
-//     text: '',
+//     text: 'hy',
 //     isPersonal: true,
 //     to: 'Дарья Шурова',
 //   }
 // )); //done
-// console.log(myModule.editMessage('1', {
-//   text: 'hi'
+// console.log(myModule.editMessage('20', {
+//   text: 'e',
+//   isPersonal: true,
+//   to:'my'
 // })); //done
+// console.log(myModule.editMessage('20', {
+//   text: 'e',
+//   isPersonal: true,
+// })); //done
+// myModule.addMessage({
+// text:'may be are you ready'
+// });//done
+
+// myModule.getMessages(0,10,{
+//   author:'купченя'
+// });//done
