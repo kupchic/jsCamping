@@ -7,6 +7,7 @@ let searchMaxSum = (arr) => {
     tempSum += arr[j];
     maxSum = Math.max(maxSum, tempSum);
   }
+  }
   return maxSum;
-}
-};
+  };
+

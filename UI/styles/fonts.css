@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'Russo One';
+    src: url('../fonts/Russo-One/RussoOne-Regular.eot');
+    src: local('Russo One'), local('Russo One'),
+        url('../fonts/Russo-One/RussoOne-Regular.eot') format('embedded-opentype'),
+        url('../fonts/Russo-One/RussoOne-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Work-Sans-Regular';
+    src: url("../fonts/Work-Sans/WorkSans-Regular.woff") format("woff"),
+        url("../fonts/Work-Sans/WorkSans-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Work-Sans-Thin';
+    src: url("../fonts/Work-Sans/WorkSans-Thin.woff") format("woff"),
+        url("../fonts/Work-Sans/WorkSans-Thin.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Work-Sans-SemiBold';
+    src: url("../fonts/Work-Sans/WorkSans-SemiBold.woff") format("woff"),
+        url("../fonts/Work-Sans/WorkSans-SemiBold.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
