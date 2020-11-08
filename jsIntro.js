@@ -291,13 +291,13 @@ const myModule = (function () {
 //   isPersonal: true,
 //   to: '3',
 // })); //done
-// console.log(myModule.addMessage(
-//   {
-//     text: 'Работает!',
-//     isPersonal: true,
-//     to: 'Дарья Шурова',
-//   }
-// )); //done
+console.log(myModule.addMessage(
+  {
+    text: 'Работает!',
+    isPersonal: true,
+    to: 'Дарья Шурова',
+  }
+)); //done
 // console.log(myModule.addMessage(
 //   {
 //     text: 'hy',
@@ -305,11 +305,11 @@ const myModule = (function () {
 //     to: 'Дарья Шурова',
 //   }
 // )); //done
-// console.log(myModule.editMessage('20', {
-//   text: 'e',
-//   isPersonal: true,
-//   to:'my'
-// })); //done
+console.log(myModule.editMessage('20', {
+  text: '',
+  isPersonal: true,
+  to:'my'
+})); //done
 // console.log(myModule.editMessage('20', {
 //   text: 'e',
 //   isPersonal: true,
@@ -321,3 +321,71 @@ const myModule = (function () {
 // myModule.getMessages(0,10,{
 //   author:'купченя'
 // });//done
+
+
+function add(a, b) {
+
+  if (b) return a + b;
+  else return (b2) => {
+    return a + b2;
+  };
+}
+
+function sub(a, b) {
+  if (b) return a - b;
+  else return (b2) => {
+    return b2-a;
+  };
+}
+
+function mul(a, b) {
+  if (b) return a * b;
+  else return (b2) => {
+    return a * b2;
+  };
+}
+
+function div(a, b) {
+  if (b) return a / b;
+  else return (b2) => {
+    return a / b2;
+  };
+}
+
+
+
+let a = add(1, 2); // 3
+console.log(a);
+
+let b = mul(a, 10); // 30
+console.log(b);
+
+
+let sub1 = sub(1); // sub1 отнимает от любого числа единицу
+let c = sub1(b); // 29
+console.log(c);
+
+let d = mul(sub(a, 2))(c); // 58
+
+console.log(d);
+
+
+
+// function pipe(...args){
+//   return (f)=>{
+//     return div(());
+//   }
+// }
+
+
+// let d = add(2);
+// console.log(d(add(1, 2)));
+// console.log('d',d);
+// let a = add(1, 2);
+// let b = mul(a, 10);
+// let sub1 = sub(1);
+
+// let c = sub1(b);
+// console.log(a);
+// console.log(b);
+// console.log(c);
