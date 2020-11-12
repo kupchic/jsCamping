@@ -2,9 +2,9 @@
 
 class Message {
   constructor(options) {
-    this._id = options.id;
+    this._id = `${+ new Date()}`;
+    this._createdAt = new Date();
     this._author = options.author;
-    this._createdAt = options.createdAt;
     this.text = options.text;
     this.isPersonal = options.isPersonal || false;
     this.to = options.to || false;
@@ -39,6 +39,123 @@ class Message {
   }
 }
 
+
+class MessagesModel {
+
+  constructor(msgs) {
+    this._arr = msgs;
+  }
+
+  static _user() {
+    return "Aлександр Купченя"; // null
+  }
+
+  get arr() {
+    return this._arr;
+  }
+  set arr(array) {
+    this._arr = array;
+  }
+  get user() {
+    return MessagesModel._user();
+  }
+  static validate(msg) {
+    const validateObj = {
+      text: (item) => item.text && item.text.length <= 200 && item.text.length !== 0,
+    };
+
+    if (msg.hasOwnProperty('isPersonal')) {
+      if (typeof msg.isPersonal !== 'boolean' || (msg.isPersonal && !(msg.hasOwnProperty('to') && typeof msg.to === 'string' && msg.to.length > 0))) {
+        return false;
+      }
+      if (!msg.isPersonal) {
+        msg.to = msg.isPersonal;
+      }
+    }
+    return Object.keys(validateObj).every((key) => validateObj[key](msg));
+  }
+
+  add(msg) {
+    if (MessagesModel.validate(msg) && MessagesModel._user()) {
+      msg.author = MessagesModel._user();
+      let msgs = new Message(msg);
+      this.arr.push(msgs);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  remove(id) {
+    this.arr.splice(
+      this.arr.findIndex(item => item.id === id), 1);
+    return this.arr;
+  }
+
+  get(id) {
+    return this.arr.find(item => {
+      return item.id === id;
+    });
+  }
+
+  edit(id, msg) {
+    let editedItem = this.arr.find(item => {
+      return item.id === id;
+    });
+
+    if (MessagesModel.validate(msg) && editedItem.author === MessagesModel._user()) {
+      for (let key in msg) {
+        editedItem[key] = msg[key];
+      }
+      return editedItem;
+    } else {
+      return false;
+    }
+  }
+
+  getPage(skip = 0, top = 10, filterConfig = {}) {
+    let messagesFiltered = this.arr.slice().sort((a, b) => {
+      return a.createdAt - b.createdAt;
+    }).filter(item => {
+      return (item.author === MessagesModel._user() || ((item.isPersonal === true && item.to === MessagesModel._user()) || item.isPersonal === false));
+    });
+
+    const filterObj = {
+      author: (item, author) => author && item.author.toLowerCase().includes(author.toLowerCase()),
+      text: (item, text) => text && item.text.toLowerCase().includes(text.toLowerCase()),
+      dateFrom: (item, dateFrom) => dateFrom && item.createdAt > +dateFrom,
+      dateTo: (item, dateTo) => dateTo && item.createdAt < dateTo,
+    };
+
+    Object.keys(filterConfig).forEach((key) => {
+      messagesFiltered = messagesFiltered.filter((item) => {
+        return filterObj[key](item, filterConfig[key]);
+      });
+    });
+    return messagesFiltered.slice(skip, skip + top);
+  }
+
+  // constructorCustom() {
+  //   let map = new Map();
+  //   for (let i = 0; i < this.arr.length; i++) {
+  //     map[this.arr[i].id] = this.arr[i];
+  //   }
+  //   return map;
+  // } ????
+
+  addAll() {
+    let map = new Map();
+    for (let i = 0; i < this.arr.length; i++) {
+      if (!MessagesModel.validate(this.arr[i]))
+        map[this.arr[i].id] = this.arr[i];
+    }
+    return map;
+  }
+  clear() {
+    console.log('dd');
+    this.arr = [];
+  }
+}
 
 let messages = [{
     id: '1',
@@ -201,100 +318,20 @@ let messages = [{
     to: false,
   },
 
+  {
+    id: '100',
+    text: '',
+    createdAt: new Date('2020-10-12T19:11:00'),
+    author: 'Jonh Snow',
+    isPersonal: false,
+    to: false,
+  },
+
 ];
 
-class MessagesModel {
 
-  static _user() {
-    return "Aлександр Купченя"; // null
-  }
+let privateS = new MessagesModel(messages);
 
-  get user() {
-    return MessagesModel._user();
-  }
-  static validate(msg) {
-    const validateObj = {
-      text: (item) => item.text && item.text.length <= 200 && item.text.length !== 0,
-    };
-
-    if (msg.hasOwnProperty('isPersonal')) {
-      if (typeof msg.isPersonal !== 'boolean' || (msg.isPersonal && !(msg.hasOwnProperty('to') && typeof msg.to === 'string' && msg.to.length > 0))) {
-        return false;
-      }
-      if (!msg.isPersonal) {
-        msg.to = msg.isPersonal;
-      }
-    }
-    if (!Object.keys(validateObj).every((key) => validateObj[key](msg))) {
-      throw new Error('message structure is invalid');
-    } else {
-      return true;
-    }
-  }
-
-  add(msg) {
-    if (MessagesModel.validate(msg) && MessagesModel._user()) {
-      msg.id = `${+ new Date()}`;
-      msg.createdAt = new Date();
-      msg.author = MessagesModel._user();
-      let msgs = new Message(msg);
-      messages.push(msgs);
-      return true;
-    } else return false;
-  }
-
-  remove(id) {
-    messages.splice(
-      messages.findIndex(item => item.id === id), 1);
-    return messages;
-  }
-
-  get(id) {
-    return messages.find(item => {
-      return item.id === id;
-    });
-  }
-
-  edit(id, msg) {
-    let editedItem = messages.find(item => {
-      return item.id === id;
-    });
-
-    if (MessagesModel.validate(msg) && editedItem.author === MessagesModel._user()) {
-      for (let key in msg) {
-        editedItem[key] = msg[key];
-      }
-      return editedItem;
-    } else {
-      return false;
-    }
-  }
-
-  getPage(skip = 0, top = 10, filterConfig = {}) {
-    let messagesFiltered = messages.slice().sort((a, b) => {
-      return a.createdAt - b.createdAt;
-    }).filter(item => {
-      return (item.author === MessagesModel._user() || ((item.isPersonal === true && item.to === MessagesModel._user()) || item.isPersonal === false));
-    });
-
-    const filterObj = {
-      author: (item, author) => author && item.author.toLowerCase().includes(author.toLowerCase()),
-      text: (item, text) => text && item.text.toLowerCase().includes(text.toLowerCase()),
-      dateFrom: (item, dateFrom) => dateFrom && item.createdAt > +dateFrom,
-      dateTo: (item, dateTo) => dateTo && item.createdAt < dateTo,
-    };
-
-    Object.keys(filterConfig).forEach((key) => {
-      messagesFiltered = messagesFiltered.filter((item) => {
-        return filterObj[key](item, filterConfig[key]);
-      });
-    });
-    return messagesFiltered.slice(skip, skip + top);
-  }
-}
-
-
-// let privateS = new MessagesModel();
 // privateS.add({
 //   text: 'w',
 //   isPersonal: false,
@@ -307,7 +344,11 @@ class MessagesModel {
 //   text: 'd,fdf',
 // });
 // privateS.remove('19');
-// privateS.get('2');
+// console.log(privateS.addAll());
+
+
+// console.log(privateS.get('2'));
 // console.log('privateS.get("1") ', privateS.get('1'));
 // console.log(privateS.getPage(0, 20));
-// console.log(messages);
+// privateS.clear();
+// console.log(privateS.arr);
