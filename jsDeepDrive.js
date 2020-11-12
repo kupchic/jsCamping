@@ -1,7 +1,5 @@
-// (function () {
-//   'use strict';
-// }());
 'use strict';
+
 class Message {
   constructor(options) {
     this._id = options.id;
@@ -46,7 +44,7 @@ let messages = [{
     id: '1',
     text: 'Привет!',
     createdAt: new Date('2020-10-12T23:00:00'),
-    author: 'Александр Купченя',
+    author: 'Aлександр Купченя',
     isPersonal: true,
     to: 'Дарья Шурова',
   },
@@ -54,7 +52,7 @@ let messages = [{
     id: '2',
     text: 'Как Дела?',
     createdAt: new Date('2020-10-12T23:01:00'),
-    author: 'Александр Купченя',
+    author: 'Aлександр Купченя',
     isPersonal: true,
     to: 'Дарья Шурова',
   },
@@ -64,7 +62,7 @@ let messages = [{
     createdAt: new Date('2020-10-12T23:00:00'),
     author: 'Дарья Шурова',
     isPersonal: true,
-    to: 'Купченя Александр',
+    to: 'Aлександр Купченя',
   },
   {
     id: '4',
@@ -72,7 +70,7 @@ let messages = [{
     createdAt: new Date('2020-10-12T23:01:10'),
     author: 'Дарья Шурова',
     isPersonal: true,
-    to: 'Александр Купченя',
+    to: 'Aлександр Купченя',
   },
   {
     id: '5',
@@ -86,7 +84,7 @@ let messages = [{
     id: '6',
     text: 'Декан пришел, палундра( Бегом на пару',
     createdAt: new Date('2020-10-12T12:30:02'),
-    author: 'Александр Купченя',
+    author: 'Aлександр Купченя',
     isPersonal: true,
     to: 'Дарья Шурова',
   },
@@ -96,7 +94,7 @@ let messages = [{
     createdAt: new Date('2020-10-12T12:35:00'),
     author: 'Дарья Шурова',
     isPersonal: false,
-    to: 'Александр Купченя',
+    to: 'Aлександр Купченя',
   },
   {
     id: '8',
@@ -205,14 +203,17 @@ let messages = [{
 
 ];
 
-var dr = 0;
-
 class MessagesModel {
 
-  _user = 'Александр Купченя' || "Unsigned user";
+  static _user() {
+    return "Aлександр Купченя"; // null
+  }
 
+  get user() {
+    return MessagesModel._user();
+  }
   static validate(msg) {
-    var validateObj = {
+    const validateObj = {
       text: (item) => item.text && item.text.length <= 200 && item.text.length !== 0,
     };
 
@@ -224,15 +225,18 @@ class MessagesModel {
         msg.to = msg.isPersonal;
       }
     }
-    return Object.keys(validateObj).every((key) => validateObj[key](msg));
+    if (!Object.keys(validateObj).every((key) => validateObj[key](msg))) {
+      throw new Error('message structure is invalid');
+    } else {
+      return true;
+    }
   }
 
   add(msg) {
-    const author = "Александр Купченя";
-    if (MessagesModel.validate(msg)) {
+    if (MessagesModel.validate(msg) && MessagesModel._user()) {
       msg.id = `${+ new Date()}`;
       msg.createdAt = new Date();
-      msg.author = author;
+      msg.author = MessagesModel._user();
       let msgs = new Message(msg);
       messages.push(msgs);
       return true;
@@ -256,17 +260,21 @@ class MessagesModel {
       return item.id === id;
     });
 
-    if (MessagesModel.validate(msg)) {
+    if (MessagesModel.validate(msg) && editedItem.author === MessagesModel._user()) {
       for (let key in msg) {
         editedItem[key] = msg[key];
       }
       return editedItem;
-    } else return false;
+    } else {
+      return false;
+    }
   }
 
   getPage(skip = 0, top = 10, filterConfig = {}) {
     let messagesFiltered = messages.slice().sort((a, b) => {
       return a.createdAt - b.createdAt;
+    }).filter(item => {
+      return (item.author === MessagesModel._user() || ((item.isPersonal === true && item.to === MessagesModel._user()) || item.isPersonal === false));
     });
 
     const filterObj = {
@@ -275,6 +283,7 @@ class MessagesModel {
       dateFrom: (item, dateFrom) => dateFrom && item.createdAt > +dateFrom,
       dateTo: (item, dateTo) => dateTo && item.createdAt < dateTo,
     };
+
     Object.keys(filterConfig).forEach((key) => {
       messagesFiltered = messagesFiltered.filter((item) => {
         return filterObj[key](item, filterConfig[key]);
@@ -285,10 +294,14 @@ class MessagesModel {
 }
 
 
-let privateS = new MessagesModel();
+// let privateS = new MessagesModel();
 // privateS.add({
-//   text: 'de',
+//   text: 'w',
 //   isPersonal: false,
+// });
+
+// privateS.edit('3', {
+//   text: 'd,fdf',
 // });
 // privateS.edit('1', {
 //   text: 'd,fdf',
@@ -296,9 +309,5 @@ let privateS = new MessagesModel();
 // privateS.remove('19');
 // privateS.get('2');
 // console.log('privateS.get("1") ', privateS.get('1'));
-// console.log(privateS.getPage(0, 10, {
-//   dateFrom: new Date('2020-10-12T19:12:00'),
-// }));
-console.log(privateS._user);
-
-console.log(e);
+// console.log(privateS.getPage(0, 20));
+// console.log(messages);
