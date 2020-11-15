@@ -1,8 +1,15 @@
 env:
   browser: true
-  es2021: true
+  es2015: true
 extends: "airbnb-base/legacy"
 parserOptions:
   ecmaVersion: 12
   sourceType: module
-rules: { no-var: "error" }
+rules: { 
+no-var: 0,
+no-underscore-dangle: 0,
+no-plusplus: 0,
+max-classes-per-file: 0,
+max-len: 0,
+no-param-reassign: 0
+}
