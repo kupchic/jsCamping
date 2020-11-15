@@ -23,13 +23,15 @@ function mul(a, b) {
 function div(a, b) {
   if (b) return a / b;
   else return (b2) => {
-    return a / b2;
+    return b2 / a;
   };
 }
 
 function pipe(...acc) {
   return (arg) => {
-
+    return acc.reduce((acc, curr) => {
+      return curr(acc);
+    }, arg);
   };
 }
 
@@ -48,8 +50,9 @@ let d = mul(sub(a, 2))(c); // 29
 
 console.log(d);
 
-// let doSmth = pipe(add(20), sub(5), mul(4), div(5));
+let doSmth = pipe(add(58), sub(29), mul(30), div(3));
 
-// let result = doSmth(1);
-// // let x = pipe(add(1), mul(2))(3); // 8
-// console.log(result);
+let result = doSmth(0);
+let x = pipe(add(1), mul(2))(3); // 8
+console.log(result);
+console.log(x);
