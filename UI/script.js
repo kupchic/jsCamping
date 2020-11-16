@@ -10,7 +10,7 @@ const sideMenu = document.querySelector('.mobile-menu');
 filterBtn.addEventListener('click', () => {
   document.querySelector('.filter-variants').classList.toggle('filter-variants_active');
   filterBtn.classList.toggle('filter-btn_checked');
-  document.querySelector(".chat-filter-wrp").classList.toggle('show');
+  document.querySelector('.chat-filter-wrp').classList.toggle('show');
   for (let i = 0; i < filterInputsList.length; i++) {
     filterInputsList[i].checked = false;
     if (document.body.clientWidth < 570) {
@@ -26,18 +26,17 @@ chat.addEventListener('scroll', () => {
   } else loadMoreMsgLink.style.display = 'inline';
 });
 
-
 window.addEventListener('click', () => {
   let target = event.target;
   if (target.className === 'menu-button') {
     sideMenuWrapper.style.display = 'block';
-    sideMenuWrapper.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    sideMenuWrapper.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     setTimeout(function () {
       sideMenu.style.transform = 'translateX(300px)';
     }, 10);
   } else if (target.className === 'mobile-menu-wrp') {
     sideMenu.style.transform = 'translateX(0px)';
-    sideMenuWrapper.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    sideMenuWrapper.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     setTimeout(function () {
       sideMenuWrapper.style.display = 'none';
     }, 500);

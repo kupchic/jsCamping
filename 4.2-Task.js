@@ -1,28 +1,27 @@
 function add(a, b) {
-
   if (b) return a + b;
-  else return (b2) => {
+  return (b2) => {
     return a + b2;
   };
 }
 
 function sub(a, b) {
   if (b) return a - b;
-  else return (b2) => {
+  return (b2) => {
     return b2 - a;
   };
 }
 
 function mul(a, b) {
   if (b) return a * b;
-  else return (b2) => {
+  return (b2) => {
     return a * b2;
   };
 }
 
 function div(a, b) {
   if (b) return a / b;
-  else return (b2) => {
+  return (b2) => {
     return b2 / a;
   };
 }
@@ -34,7 +33,6 @@ function pipe(...acc) {
     }, arg);
   };
 }
-
 
 let a = add(1, 2); // 3
 console.log(a);
