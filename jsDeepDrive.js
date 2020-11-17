@@ -1,4 +1,4 @@
-class Message {
+export class Message {
   constructor(options) {
     this._id = options.id;
     this._createdAt = options.createdAt;
@@ -21,7 +21,7 @@ class Message {
   }
 }
 
-class MessagesModel {
+export class MessagesModel {
   constructor(msgs) {
     this._arr = msgs.map(item=> new Message(item));
     this._user = 'Aleksandr Kupchenya'; // null
@@ -129,7 +129,7 @@ class MessagesModel {
   }
 }
 
-let messages = [{
+export let messages = [{
   id: '1',
   text: 'Привет!',
   createdAt: new Date('2020-10-12T23:00:00'),
@@ -325,3 +325,5 @@ privateS.add({
 // privateS.clear();
 
 // console.log(privateS._arr);
+
+// module.exports = MessagesModel;
