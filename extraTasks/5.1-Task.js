@@ -21,11 +21,14 @@ function createCalendar(elem, year, month) {
       table += '</tr><tr>';
     }
   }
-  if ((firstDay + daysInMonth) % 7 !== 0)
+  if ((firstDay + daysInMonth) % 7 !== 0) {
     for (let i = 0; i < (7 - ((firstDay + daysInMonth) % 7)); i++) {
       table += '<td></td>';
     }
+  }
 
+  table += '</tr></table>';
+  table = table.replace('<tr></tr>', "");
   let map = {
     1: 'Январь',
     2: 'Февраль',
@@ -41,13 +44,15 @@ function createCalendar(elem, year, month) {
     12: 'Декабря',
   };
 
-  const title = document.querySelector('.title');
+  const title = document.createElement('h2');
   const wrapper = document.createElement('div');
+
   wrapper.setAttribute('id', `${elem}`);
   title.textContent = `${map[month]} ${year}-го года`;
+  document.body.appendChild(title);
   document.body.appendChild(wrapper);
   wrapper.innerHTML = table;
 }
 // createCalendar('d', 2020, 2);
 // createCalendar('d', 2021, 11);
-createCalendar('wrp', 2021, 2);
+// createCalendar('wrp', 2021, 2);
