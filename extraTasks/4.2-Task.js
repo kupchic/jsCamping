@@ -1,4 +1,5 @@
 function add(a, b) {
+
   if (b) return a + b;
   return (b2) => {
     return a + b2;
@@ -53,4 +54,4 @@ let doSmth = pipe(add(58), sub(29), mul(30), div(3));
 let result = doSmth(0);
 let x = pipe(add(1), mul(2))(3); // 8
 console.log(result);
-console.log(x);
+

@@ -59,6 +59,7 @@ class List {
     previousNode.next = currentNode.next;
     this._length--;
     return true;
+
   }
 
   print() {
@@ -72,6 +73,7 @@ class List {
     console.log(this._length);
     return arr;
   }
+
 }
 
 let list = new List();
@@ -89,4 +91,3 @@ list.remove(3);
 list.remove(7);
 list.remove(5);
 
-console.log('list.print(): ', list.print());
