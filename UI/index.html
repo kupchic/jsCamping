@@ -84,10 +84,10 @@
           </label>
         </button>
         <div class="user">
-          <h3 class="user-name">kupchenya <br> aleksandr</h3>
+          <h3 class="user-name"></h3>
           <div class="user-avatar">
-            <span class="user-avatar_first-letter">K</span>
-            <span class="user-avatar_second-letter">A</span>
+            <span class="user-avatar_first-letter"></span>
+            <span class="user-avatar_second-letter"></span>
           </div>
         </div>
       </nav>
@@ -174,219 +174,84 @@
   </header>
   <main class="chat-body">
     <section class="list-block">
-      <h2 class="block-title">Online<span class="online-member-count">10</span></h2>
+      <h2 class="block-title"><span class="online-member-count"></span></h2>
+      <template id="online-user-tpl">
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar online-user-avatar">
+              <span class="user-avatar_first-letter"></span>
+              <span class="user-avatar_second-letter"></span>
+            </div>
+            <div class="chat-with-who">
+              <h4></h4>
+              <a class="write-to-btn" href="#">Write message</a>
+            </div>
+          </div>
+        </div>
+      </template>
+      <template id="chat-user-tpl">
+        <div class="chats-list__item">
+          <div class="chats-list__item__info">
+            <div class="user-avatar ">
+              <span class="user-avatar_first-letter"></span>
+              <span class="user-avatar_second-letter"></span>
+            </div>
+            <div class="chat-with-who">
+              <h4></h4>
+              <p class="chat-msg-preview"></p>
+            </div>
+            <div class="msg-time-count">
+              <time class="time-give-msg"></time>
+              <div class="count-of-personal-msg"></div>  
+            </div>
+          </div>
+        </div>
+      </template>
       <div class="chats-list">
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-        <div class="chats-list__item">
-          <div class="chats-list__item__info">
-            <div class="user-avatar online-user-avatar">
-              <span class="user-avatar_first-letter">U</span>
-              <span class="user-avatar_second-letter">N</span>
-            </div>
-            <div class="chat-with-who">
-              <h4>User Name</h4>
-              <a class="write-to-btn" href="#">Write message</a>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
     <section class="chat-block">
       <div class="blur-end">
         <button id="load-msg-link">Load More Messages</button>
       </div>
+      <template id="companion-chat-msg-tpl">
+        <div class="message-wrp">
+          <div class="companion-message-block">
+            <div class="companion-name"></div>
+            <pre
+              class="message"></pre>
+            <div class="send-time"></div>
+          </div>
+        </div>
+      </template>
+      
+      <template id="my-chat-msg-tpl">
+      <div class="message-wrp me-message-wrp">
+        <div class="msg-sett-wrp">
+          <label class="msg-sett-label">
+            <input type="radio" name="me-msg">
+            <div class="settings-modal">
+              <ul class="settings-modal-list">
+                <li class="settings-modal-list__item">Edit</li>
+                <li class="settings-modal-list__item">Delete</li>
+              </ul>
+            </div>
+            <buttot class="msg-sett-btn">
+              <span class="msg-sett-btn-dot"></span>
+              <span class="msg-sett-btn-dot"></span>
+              <span class="msg-sett-btn-dot"></span>
+            </buttot>
+          </label>
+        </div>
+        <div class="me-message-block">
+          <pre
+            class="message"></pre>
+          <div class="send-time"></div>
+        </div>
+      </div>
+      </template>
       <div class="chat-field">
-
-        <div class="message-wrp">
-          <div class="companion-message-block">
-            <div class="companion-name">User name</div>
-            <pre
-              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
-            <div class="send-time">12:31 PM</div>
-          </div>
-        </div>
-        <div class="message-wrp me-message-wrp">
-          <div class="me-message-block">
-            <pre
-              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
-            <div class="send-time">12:32 PM</div>
-          </div>
-        </div>
-        <div class="message-wrp">
-          <div class="companion-message-block">
-            <div class="companion-name">User name</div>
-            <pre
-              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
-            <div class="send-time">12:31 PM</div>
-          </div>
-        </div>
-        <div class="message-wrp me-message-wrp">
-          <div class="msg-sett-wrp">
-            <label class="msg-sett-label">
-              <input type="radio" name="me-msg">
-              <div class="settings-modal">
-                <ul class="settings-modal-list">
-                  <li class="settings-modal-list__item">Edit</li>
-                  <li class="settings-modal-list__item">Delete</li>
-                </ul>
-              </div>
-              <buttot class="msg-sett-btn">
-                <span class="msg-sett-btn-dot"></span>
-                <span class="msg-sett-btn-dot"></span>
-                <span class="msg-sett-btn-dot"></span>
-              </buttot>
-            </label>
-          </div>
-          <div class="me-message-block">
-            <pre class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit.</pre>
-            <div class="send-time">12:32 PM</div>
-          </div>
-        </div>
-        <div class="message-wrp">
-          <div class="companion-message-block">
-            <div class="companion-name">User name</div>
-            <pre class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit.</pre>
-            <div class="send-time">12:31 PM</div>
-          </div>
-        </div>
-        <div class="message-wrp me-message-wrp">
-          <div class="msg-sett-wrp">
-            <label class="msg-sett-label">
-              <input type="radio" name="me-msg">
-              <div class="settings-modal">
-                <ul class="settings-modal-list">
-                  <li class="settings-modal-list__item">Edit</li>
-                  <li class="settings-modal-list__item">Delete</li>
-                </ul>
-              </div>
-              <buttot class="msg-sett-btn">
-                <span class="msg-sett-btn-dot"></span>
-                <span class="msg-sett-btn-dot"></span>
-                <span class="msg-sett-btn-dot"></span>
-              </buttot>
-            </label>
-          </div>
-          <div class="me-message-block">
-            <pre
-              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
-            <div class="send-time">12:32 PM</div>
-          </div>
-        </div>
-        <div class="message-wrp">
-          <div class="companion-message-block">
-            <div class="companion-name">User name</div>
-            <pre
-              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
-            <div class="send-time">12:31 PM</div>
-          </div>
-        </div>
-        <div class="message-wrp me-message-wrp">
-          <div class="msg-sett-wrp">
-            <label class="msg-sett-label">
-              <input type="radio" name="me-msg">
-              <div class="settings-modal">
-                <ul class="settings-modal-list">
-                  <li class="settings-modal-list__item">Edit</li>
-                  <li class="settings-modal-list__item">Delete</li>
-                </ul>
-              </div>
-              <buttot class="msg-sett-btn">
-                <span class="msg-sett-btn-dot"></span>
-                <span class="msg-sett-btn-dot"></span>
-                <span class="msg-sett-btn-dot"></span>
-              </buttot>
-            </label>
-          </div>
-          <div class="me-message-block">
-            <pre
-              class="message">Lorem ipsum dolor sit a met, consectetur adipiscing elit. Donec sagittis ipsum quam, sed bibendum tellus vulputate a. Donec sodales diam id massa sollicitudin vehicula. Vestibulum vitae risus justo. Morbi lacinia ac dui nec pharetra. Quisque ullamcorper non urna sed malesuada. Phasellus aliquam augue sit amet orci maximus, ac congue sem tincidunt. In nec risus sed erat ultrices ultrices. Donec est metus, laoreet ut nisl eget, laoreet feugiat justo. Pellentesque feugiat at lacus fringilla gravida.</pre>
-            <div class="send-time">12:33 PM</div>
-          </div>
-        </div>
+        
       </div>
       <form id="text-send-block" action="#">
         <textarea autofocus autocomplete="off" id="text-send-input" placeholder="Type a message here..."></textarea>
@@ -407,7 +272,7 @@
     <nav class="mobile-menu">
       <div class="mobile-menu-profile">
         <div class="user">
-          <h3 class="user-name">kupchenya <br> aleksandr</h3>
+          <h3 class="user-name"></h3>
           <div class="user-avatar">
             <span class="user-avatar_first-letter">K</span>
             <span class="user-avatar_second-letter">A</span>
@@ -435,6 +300,8 @@
 
     </nav>
   </section>
+  
+  <script type="module" src="../scriptDOM.js"></script>
   <script src="script.js"></script>
 </body>
 

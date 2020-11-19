@@ -110,12 +110,15 @@ input[name='capabil']:checked~.capabil-icon>path {
   align-items: center;
 }
 
-.user h3 {
+.user .user-name {
   font-family: var(--russo);
   letter-spacing: 0.05rem;
   text-transform: uppercase;
   color: var(--textBlackColor);
   font-size: 1rem;
+  max-width: 7.1429rem;
+  text-align: end;
+  width:min-content;
 }
 
 .user-avatar {
@@ -129,6 +132,7 @@ input[name='capabil']:checked~.capabil-icon>path {
   font-size: 1.5rem;
   color: #fff;
   font-family: var(--russo);
+  text-transform: uppercase;
 }
 
 .chat-name h4 {
@@ -218,7 +222,7 @@ input[name='capabil']:checked~.capabil-icon>path {
   height: 2.3rem;
   border-radius: 1rem;
   text-indent: 0.65rem;
-  line-height: 2.4crem;
+  line-height: 2.4rem;
   margin-bottom: 0.2rem;
 }
 
@@ -282,7 +286,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[name='filter']:checked~.filter-kind-btn {
   position: absolute;
   right: 0px;
-  transition-duration: 0.5;
+  transition-duration: 0.5s;
   transform: scale(0.55)
 }
 
@@ -319,7 +323,6 @@ input[name='filter']:checked~.filter-kind-btn {
   border-radius: 10px;
   padding: 1.5rem 1.7rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -330,6 +333,7 @@ input[name='filter']:checked~.filter-kind-btn {
 .chats-list__item__info {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .chats-list__item .user-avatar {
@@ -349,19 +353,31 @@ input[name='filter']:checked~.filter-kind-btn {
 }
 
 .chat-with-who h4 {
-  font-size: 1.5rem;
+  font-size: 1.2857rem;
   font-family: var(--russo);
   color: var(--textBlackColor);
   letter-spacing: 0.05rem;
   margin-bottom: 5px;
+  white-space: nowrap;
 }
 
-.write-to-btn {
+.write-to-btn, .chat-msg-preview {
   font-size: 1rem;
   color: #BDBEC5;
   font-family: var(--WorkSemiB);
   text-decoration: none;
   letter-spacing: 0.05rem;
+  white-space: nowrap;
+}
+.chat-msg-preview{
+  max-width: 15.7143rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.time-give-msg{
+  color: #BDBEC5;
+  font-size: 10px;
+  font-family: var(--WorkSemiB);
 }
 
 .block-title {
@@ -371,7 +387,33 @@ input[name='filter']:checked~.filter-kind-btn {
   margin-bottom: 30px;
   font-family: var(--russo);
 }
-
+.chat-with-who{
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.msg-time-count{
+  padding: 7px 0;
+  margin-left: auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  
+}
+.count-of-personal-msg{
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5rem;
+  font-size: 0.8571rem;
+  font-family: var(--WorkSemiB);
+  background-color: var(--mainColor);
+}
 .online-member-count {
   font-size: 2rem;
   color: var(--mainColor);
@@ -424,11 +466,9 @@ input[name='filter']:checked~.filter-kind-btn {
 .companion-message-block,
 .me-message-block {
   display: inline-block;
-  padding: 1.5rem;
-  padding-bottom: 0.5rem;
+  padding: 1.5rem 1rem 0.5rem 1.5rem;
   color: #fff;
   max-width: 67%;
-  min-width: 21rem;
 }
 
 .companion-message-block {
@@ -441,6 +481,7 @@ input[name='filter']:checked~.filter-kind-btn {
   font-size: 1.5rem;
   font-family: var(--russo);
   margin-bottom: 0.5rem;
+  padding-right: 2.1429rem;
 }
 
 .message {
@@ -450,6 +491,7 @@ input[name='filter']:checked~.filter-kind-btn {
   font-size: var(--biggerFSize);
   line-height: 140%;
   text-align: justify;
+  margin-right: 2.1429rem;
 }
 
 .send-time {
@@ -759,6 +801,8 @@ label[for="menu-btn"] {
   font-size: 1.5rem;
   color: #fff;
   line-height: 2rem;
+  text-align: center;
+  max-width: unset;
 }
 
 .mobile-menu .user .user-avatar {
