@@ -24,7 +24,7 @@ export class Message {
 export class MessagesModel {
   constructor(msgs) {
     this._arr = msgs.map(item=> new Message(item));
-    this._user = 'Aleksandr Kupchenya'; // null
+    this._user = null;
   }
 
   get arr() {
@@ -37,6 +37,10 @@ export class MessagesModel {
 
   get user() {
     return this._user;
+  }
+
+  set user(value) {
+    this._user = value;
   }
 
   static validate(msg) {
@@ -53,7 +57,7 @@ export class MessagesModel {
 
   add(msg) {
     if (MessagesModel.validate(msg) && this._user) {
-      msg.id = `${new Date()}`;
+      msg.id = `${+new Date()}`;
       msg.createdAt = new Date();
       msg.author = this._user;
       let msgs = new Message(msg);
@@ -301,7 +305,7 @@ export let messages = [{
 
 ];
 
-let privateS = new MessagesModel(messages);
+export let privateS = new MessagesModel(messages);
 
 privateS.add({
   text: 'SW',
