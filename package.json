@@ -1,0 +1,28 @@
+{
+  "name": "jsCamping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jsDeepDrive.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "scripts": {
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kupchic/jsCamping.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kupchic/jsCamping/issues"
+  },
+  "homepage": "https://github.com/kupchic/jsCamping#readme"
+}

@@ -36,6 +36,7 @@ class List {
     this._length++;
     return true;
   }
+
   remove(index) {
     if (index < 0 || index > this._length) {
       return false;
@@ -90,5 +91,3 @@ list.remove(3);
 list.remove(7);
 list.remove(5);
 
-
-console.log('list.print(): ', list.print());

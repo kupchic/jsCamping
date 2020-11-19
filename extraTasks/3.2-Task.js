@@ -1,6 +1,6 @@
 let getProfit = (arr) => {
   arr = arr.filter(a=>{
-    return a>0&&a;
+    return a > 0 && a;
   });
   if (arr.length < 2) return 0;
   let profit = 0;

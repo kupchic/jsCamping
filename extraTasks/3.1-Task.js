@@ -3,9 +3,9 @@ let searchMaxSum = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     let tempSum = 0;
     for (let j = i; j < arr.length; j++) {
-    tempSum += arr[j];
-    maxSum = Math.max(maxSum, tempSum);
-  }
+      tempSum += arr[j];
+      maxSum = Math.max(maxSum, tempSum);
+    }
   }
   return maxSum;
 };
