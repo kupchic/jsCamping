@@ -133,7 +133,7 @@ export class MessagesModel {
   }
 }
 
-export let messages = [{
+let messages = [{
   id: '1',
   text: 'Привет!',
   createdAt: new Date('2020-10-12T23:00:00'),
@@ -331,3 +331,148 @@ privateS.add({
 // console.log(privateS._arr);
 
 // module.exports = MessagesModel;
+const logInWindow = document.querySelector('.login-window');
+const signUpWindow = document.querySelector('.signup-window');
+
+const loginFieldOfLogin = document.getElementById('login-input-of-login');
+const passwordFieldOfLogin = document.getElementById('password-input-of-login');
+const loginBtn = document.getElementById('login-btn');
+console.log(loginBtn);
+// console.log(loginFieldOfLogin, passwordFieldOfLogin, loginBtn);
+
+const loginFildOfSignUp = document.getElementById('login-input-of-signup');
+const passwordFieldOfSignUp = document.getElementById('password-of-signup');
+const passwordConfirmOfSignUp = document.getElementById('password-confirm-of-signup');
+const signUpBtn = document.getElementById('signup-btn');
+const signOutBtns = document.querySelectorAll('.sign-out-btn');
+const toSignUpWindow = document.getElementById('to-sign-up-window');
+console.log(toSignUpWindow);
+// console.log(loginFildOfSignUp, passwordFieldOfSignUp, passwordConfirmOfSignUp, signUpBtn);
+const loginAuthorPanel = document.querySelector('.author-capabil');
+const inputsCollection = document.querySelectorAll('input');
+const toLoginWindowBtns = document.querySelectorAll('.to-login-window');
+const toOnlineUsersBtns = document.querySelectorAll('.to-online-users');
+const toMainWindowBtns = document.querySelectorAll('.to-main-window');
+const toDirectBtns = document.querySelectorAll('.to-direct');
+console.log(toDirectBtns);
+
+const validator = RegExp('(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}');
+
+// if (!signUpWindow.className.includes('hide')) {
+for (let i = 0; i < inputsCollection.length; i++) {
+  inputsCollection[i].addEventListener('input', () => {
+    if (inputsCollection[i].value === '') {
+      inputsCollection[i].classList.add('unvalidate');
+    } else inputsCollection[i].classList.remove('unvalidate');
+  });
+}
+
+passwordFieldOfSignUp.addEventListener('input', () => {
+  if (validator.test(passwordFieldOfSignUp.value)) {
+    passwordFieldOfSignUp.classList.add('validate');
+    passwordConfirmOfSignUp.removeAttribute('disabled');
+  } else if (!validator.test(passwordFieldOfSignUp.value)) {
+    passwordFieldOfSignUp.classList.remove('validate');
+    passwordConfirmOfSignUp.setAttribute('disabled', '');
+    passwordConfirmOfSignUp.value = '';
+  }
+});
+
+passwordConfirmOfSignUp.addEventListener('input', () => {
+  if (passwordConfirmOfSignUp.value === passwordFieldOfSignUp.value && validator.test(passwordConfirmOfSignUp.value)) {
+    passwordConfirmOfSignUp.classList.remove('invalid-pass');
+    passwordConfirmOfSignUp.setCustomValidity('');
+  } else if (passwordConfirmOfSignUp.value !== passwordFieldOfSignUp.value) {
+    passwordConfirmOfSignUp.classList.add('invalid-pass');
+    passwordConfirmOfSignUp.setCustomValidity('Passwords do not match');
+  }
+});
+// }
+
+const linkToLogin = document.querySelector('.link-to-login-widow');
+
+let loginUserPanelControl = (item)=>{
+  let target = item.target;
+  if (target.id === 'online-users') {
+    window.showMessages();
+  } else if (target.id === 'direct') {
+    window.showActiveUsers();
+  } else if (target.id === 'log-out') {
+    linkToLogin.style.display = 'block';
+    loginAuthorPanel.classList.add('hide');
+    loginAuthorPanel.removeEventListener('click', ()=>{});
+  }
+};
+
+window.showLoginWindow = ()=> {
+  logInWindow.classList.remove('hide');
+};
+
+loginAuthorPanel.addEventListener('click', loginUserPanelControl);
+
+let logInForm = document.getElementById('login-form');
+let signUpForm = document.getElementById('sign-up-form');
+
+logInForm.addEventListener('reset', ()=>{
+  logInWindow.classList.add('hide');
+});
+signUpForm.addEventListener('reset', ()=>{
+  signUpWindow.classList.add('hide');
+});
+
+signUpForm.addEventListener('reset', ()=>{
+  logInWindow.classList.add('hide');
+});
+
+function showSignUp() {
+  logInWindow.classList.add('hide');
+  signUpWindow.classList.remove('hide');
+  console.log('clcik');
+  // signUpBtn.removeEventListener('click', showSignUp);
+}
+
+toSignUpWindow.addEventListener('click', showSignUp);
+
+console.log(toSignUpWindow);
+
+console.log(toMainWindowBtns);
+
+for (let i = 0; i < toMainWindowBtns.length; i++) {
+  toMainWindowBtns[i].addEventListener('click', ()=>{
+    logInWindow.classList.add('hide');
+  });
+}
+
+function validateform(event) {
+  event.preventDefault();
+  let okey = true;
+  for (let i = 0; i < inputsCollection.length; i++) {
+    inputsCollection[i].setAttribute('required', '');
+    if (inputsCollection[i].value === '') {
+      okey = false;
+    }
+  }
+}
+
+// function go() {
+//   let gfd = this.value;
+//   console.log(gfd);
+// }
+
+// logInForm.addEventListener('submit', go);
+
+// class Logined {
+//   constructor(containerId) {
+//     this.curUserNameField = containerId;
+//   }
+
+//   display() {
+
+//   }
+// }
+
+// class Controller {
+//   constructor() {
+//     this.onlineUsers =
+//   }
+// }

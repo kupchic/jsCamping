@@ -11,12 +11,92 @@
 </head>
 
 <body>
-  
+
+  <div class="login-window hide">
+    <div class="login-form-wrp">
+      <div class="left-side"><span class="left-side__title">Log In</span></div>
+      <form action="server-ok.json" id="login-form" class="form" method="POST">
+        <h2 class="form-wrp-title">You have an account?</h2>
+        <h3 class="form-wrp-subtitle">Use the form below to log into your account.</h3>
+        <div class="form-wrp">
+          <div class="input-wrp">
+            <label for="login-input-of-login" class="input-title">Login</label>
+            <label>
+              <input type="text" class="input unvalidate" id="login-input-of-login" pattern="^\S+ \S+$">
+            </label>
+          </div>
+          <div class="input-wrp">
+            <label for="password-input-of-login" class="input-title">Password</label>
+            <input
+              title="User password must contain at least 8 characters, uppercase and lowercase letters, and numbers"
+              id="password-input-of-login" type="password" class="input unvalidate"
+              pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
+          </div>
+          <button id="login-btn" class="login-btn" type="submit">Log In</button>
+          <p class="wrong-message" id="login-warning">wrong login or password</p>
+          <div class="form-footer">
+            <div class="form-footer__block">
+              <p class="login-question">Don’t have an account?</p>
+              <button type="button" id="to-sign-up-window">Sign up</button>
+            </div>
+            <div class="form-footer__block">
+              <p class="login-question">Go to the</p>
+              <button class="to-main-window" type="reset">Main Page</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="signup-window hide">
+    <div class="login-form-wrp">
+      <div class="left-side"><span class="left-side__title">Sign Up</span></div>
+      <form action="#" id="sign-up-form" class="form" method="POST">
+        <h2 class="form-wrp-title">New user? </h2>
+        <h3 class="form-wrp-subtitle">Use the form below to create your account.</h3>
+        <div class="form-wrp">
+          <div class="input-wrp">
+            <label for="login-input-of-signup" class="input-title">Login</label>
+            <label>
+              <input id="login-input-of-signup" type="text" class="input unvalidate" pattern="^\S+ \S+$">
+            </label>
+          </div>
+          <div class="input-wrp confirm-pass-wrp">
+            <label for="password-confirm-of-signup" class="input-title">Confirm Password</label>
+            <input disabled id="password-confirm-of-signup" type="password" class="input unvalidate"
+              pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
+          </div>
+          <div class="input-wrp pass-wrp">
+            <label for="password-of-signup" class="input-title">Password</label>
+            <input
+              title="User password must contain at least 8 characters, uppercase and lowercase letters, and numbers"
+              id="password-of-signup" type="password" class="input unvalidate"
+              pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
+          </div>
+
+          <button id="signup-btn" class="login-btn" type="submit">Sign Up</button>
+          <p class="wrong-message " id="sign-up-warning">A user with this login already exists</p>
+          <div class="form-footer">
+            <div class="form-footer__block">
+              <p class="login-question">Have an account?</p>
+              <button class="to-login-window" type="button">Log In</button>
+            </div>
+            <div class="form-footer__block">
+              <p class="login-question">Go to the</p>
+              <button class="to-main-window" type="reset">Main Page</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
 
   <header class="chat-header">
     <div class="log-part">
-      <!-- <button class="login-btn">Log In</button> -->
-      <nav class="author-capabil">
+      <button class="login-btn link-to-login-widow">Log In</button>
+      <nav class="author-capabil hide">
         <button title="Log Out" class="capabil-btn">
           <label for="log-out">
             <input id="log-out" type="radio" name="capabil" />
@@ -31,27 +111,7 @@
             </svg>
           </label>
         </button>
-        <button title="Users Online" class="capabil-btn">
-          <label for="online-users">
-            <input id="online-users" type="radio" name="capabil">
-            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M15.1251 15.865H6.36822C2.85674 15.865 0 18.7217 0 22.2331V31.7553H17.4305V23.3262C17.4305 21.2821 18.7057 19.5313 20.5019 18.8243C19.3709 17.0469 17.3836 15.865 15.1251 15.865Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-              <path
-                d="M10.7467 3.24463C7.78979 3.24463 5.38416 5.65026 5.38416 8.60715C5.38416 11.564 7.78979 13.9697 10.7467 13.9697C13.7036 13.9697 16.1092 11.564 16.1092 8.60715C16.1092 5.65026 13.7036 3.24463 10.7467 3.24463Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-              <path
-                d="M31.545 19.8712H22.2676C20.3625 19.8712 18.8126 21.4211 18.8126 23.3262V31.7554H21.4934H35.0001V23.3262C35.0001 21.4212 33.4501 19.8712 31.545 19.8712Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-              <path
-                d="M26.9062 9.78394C24.7235 9.78394 22.9478 11.5598 22.9478 13.7424C22.9478 15.9251 24.7235 17.7009 26.9062 17.7009C29.089 17.7009 30.8647 15.9251 30.8647 13.7424C30.8647 11.5597 29.089 9.78394 26.9062 9.78394Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-            </svg>
-          </label>
-        </button>
-        <button title='Direct' class="capabil-btn"> <span class="message-count">2</span>
+        <button title='Direct' class="capabil-btn to-direct"> <span class="message-count">2</span>
           <label for="direct">
             <input id="direct" type="radio" name="capabil">
             <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
@@ -69,7 +129,28 @@
             </svg>
           </label>
         </button>
-        <button title='Main Chat' class="capabil-btn">
+        <button title="Users Online" class="capabil-btn to-online-users">
+          <label for="online-users">
+            <input checked id="online-users" type="radio" name="capabil">
+            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.1251 15.865H6.36822C2.85674 15.865 0 18.7217 0 22.2331V31.7553H17.4305V23.3262C17.4305 21.2821 18.7057 19.5313 20.5019 18.8243C19.3709 17.0469 17.3836 15.865 15.1251 15.865Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M10.7467 3.24463C7.78979 3.24463 5.38416 5.65026 5.38416 8.60715C5.38416 11.564 7.78979 13.9697 10.7467 13.9697C13.7036 13.9697 16.1092 11.564 16.1092 8.60715C16.1092 5.65026 13.7036 3.24463 10.7467 3.24463Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M31.545 19.8712H22.2676C20.3625 19.8712 18.8126 21.4211 18.8126 23.3262V31.7554H21.4934H35.0001V23.3262C35.0001 21.4212 33.4501 19.8712 31.545 19.8712Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M26.9062 9.78394C24.7235 9.78394 22.9478 11.5598 22.9478 13.7424C22.9478 15.9251 24.7235 17.7009 26.9062 17.7009C29.089 17.7009 30.8647 15.9251 30.8647 13.7424C30.8647 11.5597 29.089 9.78394 26.9062 9.78394Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+            </svg>
+          </label>
+        </button>
+
+        <!-- <button title='Main Chat' class="capabil-btn">
           <label for="main-chat">
             <input id="main-chat" type="radio" name="capabil">
             <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
@@ -82,7 +163,7 @@
                 fill="#BDBEC5" fill-opacity="0.8" />
             </svg>
           </label>
-        </button>
+        </button> -->
         <div class="user">
           <h3 class="user-name"></h3>
           <div class="user-avatar">
@@ -174,7 +255,12 @@
   </header>
   <main class="chat-body">
     <section class="list-block">
-      <h2 class="block-title"><span class="online-member-count"></span></h2>
+
+
+      <div>
+        <h2 class="block-title"></h2>
+        <span class="online-member-count"></span>
+      </div>
       <template id="online-user-tpl">
         <div class="chats-list__item">
           <div class="chats-list__item__info">
@@ -202,7 +288,7 @@
             </div>
             <div class="msg-time-count">
               <time class="time-give-msg"></time>
-              <div class="count-of-personal-msg"></div>  
+              <div class="count-of-personal-msg"></div>
             </div>
           </div>
         </div>
@@ -218,40 +304,38 @@
         <div class="message-wrp">
           <div class="companion-message-block">
             <div class="companion-name"></div>
-            <pre
-              class="message"></pre>
+            <pre class="message"></pre>
             <div class="send-time"></div>
           </div>
         </div>
       </template>
-      
+
       <template id="my-chat-msg-tpl">
-      <div class="message-wrp me-message-wrp">
-        <div class="msg-sett-wrp">
-          <label class="msg-sett-label">
-            <input type="radio" name="me-msg">
-            <div class="settings-modal">
-              <ul class="settings-modal-list">
-                <li class="settings-modal-list__item">Edit</li>
-                <li class="settings-modal-list__item">Delete</li>
-              </ul>
-            </div>
-            <buttot class="msg-sett-btn">
-              <span class="msg-sett-btn-dot"></span>
-              <span class="msg-sett-btn-dot"></span>
-              <span class="msg-sett-btn-dot"></span>
-            </buttot>
-          </label>
+        <div class="message-wrp me-message-wrp">
+          <div class="msg-sett-wrp">
+            <label class="msg-sett-label">
+              <input type="radio" name="me-msg">
+              <div class="settings-modal">
+                <ul class="settings-modal-list">
+                  <li class="settings-modal-list__item">Edit</li>
+                  <li class="settings-modal-list__item">Delete</li>
+                </ul>
+              </div>
+              <buttot class="msg-sett-btn">
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+              </buttot>
+            </label>
+          </div>
+          <div class="me-message-block">
+            <pre class="message"></pre>
+            <div class="send-time"></div>
+          </div>
         </div>
-        <div class="me-message-block">
-          <pre
-            class="message"></pre>
-          <div class="send-time"></div>
-        </div>
-      </div>
       </template>
       <div class="chat-field">
-        
+
       </div>
       <form id="text-send-block" action="#">
         <textarea autofocus autocomplete="off" id="text-send-input" placeholder="Type a message here..."></textarea>
@@ -280,15 +364,15 @@
         </div>
       </div>
       <ul class="mobile-menu-list mobile-menu-list_signed">
-        <li><span class="message-count">1</span>Direct</li>
-        <li>Main Chat</li>
-        <li>Online Users</li>
-        <li>Sign Out</li>
+        <li><span class="message-count">1</span><button class="to-direct">Direct</button></li>
+        <li> <button class="to-main-window">Main Chat</button></li>
+        <li> <button class="to-online-users">Online Users</button> </li>
+        <li> <button class="sign-out-btn"> Sign Out</button></li>
       </ul>
       <ul class="mobile-menu-list mobile-menu-list_unsigned">
-        <li>Log In</li>
-        <li>Main Chat</li>
-        <li>Online Users</li>
+        <li> <button class="to-login-window">Log In</button></li>
+        <li> <button class="to-main-window">Main Chat</button></li>
+        <li> <button class="to-online-users">Online Users</button> </li>
       </ul>
       <ul class="footer-links">
         <li class="footer-links__item"><a href="index.html"><span class="chat-icon"></span>MyChat</a></li>
@@ -300,9 +384,9 @@
 
     </nav>
   </section>
-  
-  <script type="module" src="../scriptDOM.js"></script>
-  <script src="script.js"></script>
+  <script src="../allLogic.js"></script>
+  <script src="./script.js"></script>
+
 </body>
 
 </html>
