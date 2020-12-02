@@ -1,9 +1,9 @@
 // Model
 class Message {
   constructor(options) {
-    this._id = options.id;
-    this._createdAt = options.createdAt;
-    this._author = options.author;
+    this._id = options.id || options._id;
+    this._createdAt = options.createdAt || options._createdAt;
+    this._author = options.author || options._author;
     this.text = options.text;
     this.isPersonal = options.isPersonal || false;
     this.to = options.to || false;
@@ -29,7 +29,7 @@ class MessagesModel {
         return new Date(value);
       }
       return value;
-    })/* .map(item=> new Message(item)) */;
+    }).map(item=> new Message(item));
     this._user = localStorage.currentUser;
   }
 
@@ -77,6 +77,10 @@ class MessagesModel {
   save() {
     localStorage.setItem('messages', JSON.stringify(this.arr));
   }
+
+  // restore(){
+
+  // }
 
   remove(id) {
     this.arr.splice(
@@ -211,16 +215,16 @@ class MessagesView {
     const chatView = new DocumentFragment();
     const userName = localStorage.getItem('currentUser');
     for (let i = 0; i < params.length; i++) {
-      if (params[i]._author === userName || (params[i]._author !== userName && localStorage.currentUser === null)) {
+      if (params[i]._author === userName /* || (params[i]._author !== userName && localStorage.currentUser !== 'null') */) {
         let myMsgChildren = myMsgTpl.content.cloneNode(true);
         myMsgChildren.querySelector('.message').textContent = params[i].text;
-        // myMsgChildren.querySelector('.send-time').textContent = `${params[i].createdAt.getHours()}:${String(params[i].createdAt.getMinutes()).length === 2 ? params[i].createdAt.getMinutes() : '0' + params[i].createdAt.getMinutes()} ${params[i].createdAt.getHours() > 12 ? 'PM' : 'AM'}`;
+        myMsgChildren.querySelector('.send-time').textContent = `${params[i].createdAt.getHours()}:${String(params[i].createdAt.getMinutes()).length === 2 ? params[i].createdAt.getMinutes() : '0' + params[i].createdAt.getMinutes()} ${params[i].createdAt.getHours() > 12 ? 'PM' : 'AM'}`;
         chatView.appendChild(myMsgChildren);
       } else if (params[i]._author !== userName) {
         let companionMsgChildren = companionMsgTpl.content.cloneNode(true);
-        companionMsgChildren.querySelector('.companion-name').textContent = params[i].author;
+        companionMsgChildren.querySelector('.companion-name').textContent = params[i]._author;
         companionMsgChildren.querySelector('.message').textContent = params[i].text;
-        // companionMsgChildren.querySelector('.send-time').textContent = `${params[i]._createdAt.getHours()}:${String(params[i].createdAt.getMinutes()).length === 2 ? params[i].createdAt.getMinutes() : '0' + params[i].createdAt.getMinutes()} ${params[i].createdAt.getHours() > 12 ? 'PM' : 'AM'}`;
+        companionMsgChildren.querySelector('.send-time').textContent = `${params[i]._createdAt.getHours()}:${String(params[i].createdAt.getMinutes()).length === 2 ? params[i].createdAt.getMinutes() : '0' + params[i].createdAt.getMinutes()} ${params[i].createdAt.getHours() > 12 ? 'PM' : 'AM'}`;
         chatView.appendChild(companionMsgChildren);
       }
     }
@@ -244,10 +248,10 @@ class ChatMessagesView { // for me...
     for (let i = 0; i < params.length; i++) {
       if (params[i].to === localStorage.getItem('currentUser')) {
         let children = msgTpl.content.cloneNode(true);
-        children.querySelector('.chat-with-who > h4').textContent = params[i].author;
+        children.querySelector('.chat-with-who > h4').textContent = params[i]._author;
         children.querySelector('.chat-with-who > .chat-msg-preview').textContent = params[i].text;
-        children.querySelector('.user-avatar > .user-avatar_first-letter').textContent = params[i].author.split(' ')[0][0];
-        children.querySelector('.user-avatar > .user-avatar_second-letter').textContent = params[i].author.split(' ')[1][0];
+        children.querySelector('.user-avatar > .user-avatar_first-letter').textContent = params[i]._author.split(' ')[0][0];
+        children.querySelector('.user-avatar > .user-avatar_second-letter').textContent = params[i]._author.split(' ')[1][0];
         children.querySelector('.count-of-personal-msg').style.display = 'none';
         messageExample.appendChild(children);
       }
@@ -474,7 +478,7 @@ class Controller {
   }
 
   addMessage(obj) {
-    this.model.add(obj);
+    return this.model.add(obj);
     // /* return */this.messagesView.display(this.model.getPage());
   }
 
@@ -686,9 +690,37 @@ msgForm.addEventListener('submit', (event)=>{
     controller.showMessages();
     sendMsgInput.value = '';
   }
-  // console.log(localStorage.messages);
 });
 loadMore.addEventListener('click', ()=>{
   controller.count += 10;
   controller.showMessages();
+});
+
+const filterByUser = document.getElementById('filter-by-user');
+const filterByText = document.getElementById('filter-by-text');
+const filterFromDate = document.getElementById('filter-date-from');
+const filterToDate = document.getElementById('filter-date-to');
+
+let filterForm = document.getElementById('filter-form');
+let filterSubmit = document.querySelector('.filter-submit');
+
+filterForm.addEventListener('submit', (event)=>{
+  event.preventDefault();
+  document.querySelector('.filter-variants').classList.remove('filter-variants_active');
+  document.querySelector('.filter-btn').classList.remove('hide');
+  filterSubmit.classList.add('hide');
+  let typesFilter = {
+    author: filterByUser,
+    text: filterByText,
+    dateFrom: filterFromDate,
+    dateTo: filterToDate
+  };
+  let objforFilter = {};
+  Object.keys(typesFilter).forEach(key=>{
+    if (typesFilter[key].value) {
+      objforFilter[key] = typesFilter[key].value;
+    }
+  });
+
+  controller.showMessages(0, 10, objforFilter);
 });

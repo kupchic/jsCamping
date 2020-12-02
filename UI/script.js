@@ -1,4 +1,5 @@
-const filterBtn = document.querySelector('.filter-btn');
+const filterBtnOpen = document.querySelector('.filter-btn');
+const filterBtnSubmit = document.querySelector('.filter-submit');
 const filterInputsList = document.querySelectorAll('input[name="filter"]');
 const chatNameBlock = document.querySelector('.chat-description');
 const chat = document.querySelector('.chat-field');
@@ -7,9 +8,10 @@ const loadMoreMsgLink = document.getElementById('load-msg-link');
 const sideMenuWrapper = document.querySelector('.mobile-menu-wrp');
 const sideMenu = document.querySelector('.mobile-menu');
 
-filterBtn.addEventListener('click', () => {
-  document.querySelector('.filter-variants').classList.toggle('filter-variants_active');
-  filterBtn.classList.toggle('filter-btn_checked');
+filterBtnOpen.addEventListener('click', () => {
+  document.querySelector('.filter-variants').classList.add('filter-variants_active');
+  filterBtnOpen.classList.add('hide');
+  filterBtnSubmit.classList.remove('hide');
   document.querySelector('.chat-filter-wrp').classList.toggle('show');
   for (let i = 0; i < filterInputsList.length; i++) {
     filterInputsList[i].checked = false;
@@ -53,4 +55,13 @@ if (document.documentElement.clientWidth < 1000) {
       }, 500);
     }
   });
+}
+
+function clickRadio(el) {
+  var siblings = document.querySelectorAll("input[type='radio'][name='" + el.name + "']");
+  for (let i = 0; i < siblings.length; i++) {
+    if (siblings[i] !== el) { siblings[i].oldChecked = false; }
+  }
+  if (el.oldChecked) { el.checked = false; }
+  el.oldChecked = el.checked;
 }
