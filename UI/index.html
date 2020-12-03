@@ -11,12 +11,92 @@
 </head>
 
 <body>
-  
+
+  <div class="login-window hide">
+    <div class="login-form-wrp">
+      <div class="left-side"><span class="left-side__title">Log In</span></div>
+      <form action="#" id="login-form" class="form" method="POST">
+        <h2 class="form-wrp-title">You have an account?</h2>
+        <h3 class="form-wrp-subtitle">Use the form below to log into your account.</h3>
+        <div class="form-wrp">
+          <div class="input-wrp">
+            <label for="login-input-of-login" class="input-title">Login</label>
+            <label>
+              <input type="text" class="input unvalidate" id="login-input-of-login" pattern="^\S+ \S+$">
+            </label>
+          </div>
+          <div class="input-wrp">
+            <label for="password-input-of-login" class="input-title">Password</label>
+            <input
+              title="User password must contain at least 8 characters, uppercase and lowercase letters, and numbers"
+              id="password-input-of-login" type="password" class="input unvalidate"
+              pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
+          </div>
+          <button id="login-btn" class="login-btn" type="submit">Log In</button>
+          <p class="wrong-message" id="login-warning">wrong login or password</p>
+          <div class="form-footer">
+            <div class="form-footer__block">
+              <p class="login-question">Don’t have an account?</p>
+              <button type="button" id="to-sign-up-window">Sign up</button>
+            </div>
+            <div class="form-footer__block">
+              <p class="login-question">Go to the</p>
+              <button class="to-main-window" type="reset">Main Page</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="signup-window hide">
+    <div class="login-form-wrp">
+      <div class="left-side"><span class="left-side__title">Sign Up</span></div>
+      <form action="#" id="sign-up-form" class="form" method="POST">
+        <h2 class="form-wrp-title">New user? </h2>
+        <h3 class="form-wrp-subtitle">Use the form below to create your account.</h3>
+        <div class="form-wrp">
+          <div class="input-wrp">
+            <label for="login-input-of-signup" class="input-title">Login</label>
+            <label>
+              <input id="login-input-of-signup" type="text" class="input unvalidate" pattern="^\S+ \S+$">
+            </label>
+          </div>
+          <div class="input-wrp confirm-pass-wrp">
+            <label for="password-confirm-of-signup" class="input-title">Confirm Password</label>
+            <input disabled id="password-confirm-of-signup" type="password" class="input unvalidate"
+              pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
+          </div>
+          <div class="input-wrp pass-wrp">
+            <label for="password-of-signup" class="input-title">Password</label>
+            <input
+              title="User password must contain at least 8 characters, uppercase and lowercase letters, and numbers"
+              id="password-of-signup" type="password" class="input unvalidate"
+              pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
+          </div>
+
+          <button id="signup-btn" class="login-btn" type="submit">Sign Up</button>
+          <p class="wrong-message " id="sign-up-warning">A user with this login already exists</p>
+          <div class="form-footer">
+            <div class="form-footer__block">
+              <p class="login-question">Have an account?</p>
+              <button class="to-login-window" type="button">Log In</button>
+            </div>
+            <div class="form-footer__block">
+              <p class="login-question">Go to the</p>
+              <button class="to-main-window" type="reset">Main Page</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
 
   <header class="chat-header">
     <div class="log-part">
-      <!-- <button class="login-btn">Log In</button> -->
-      <nav class="author-capabil">
+      <button class="login-btn link-to-login-widow">Log In</button>
+      <nav class="author-capabil hide">
         <button title="Log Out" class="capabil-btn">
           <label for="log-out">
             <input id="log-out" type="radio" name="capabil" />
@@ -31,27 +111,7 @@
             </svg>
           </label>
         </button>
-        <button title="Users Online" class="capabil-btn">
-          <label for="online-users">
-            <input id="online-users" type="radio" name="capabil">
-            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M15.1251 15.865H6.36822C2.85674 15.865 0 18.7217 0 22.2331V31.7553H17.4305V23.3262C17.4305 21.2821 18.7057 19.5313 20.5019 18.8243C19.3709 17.0469 17.3836 15.865 15.1251 15.865Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-              <path
-                d="M10.7467 3.24463C7.78979 3.24463 5.38416 5.65026 5.38416 8.60715C5.38416 11.564 7.78979 13.9697 10.7467 13.9697C13.7036 13.9697 16.1092 11.564 16.1092 8.60715C16.1092 5.65026 13.7036 3.24463 10.7467 3.24463Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-              <path
-                d="M31.545 19.8712H22.2676C20.3625 19.8712 18.8126 21.4211 18.8126 23.3262V31.7554H21.4934H35.0001V23.3262C35.0001 21.4212 33.4501 19.8712 31.545 19.8712Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-              <path
-                d="M26.9062 9.78394C24.7235 9.78394 22.9478 11.5598 22.9478 13.7424C22.9478 15.9251 24.7235 17.7009 26.9062 17.7009C29.089 17.7009 30.8647 15.9251 30.8647 13.7424C30.8647 11.5597 29.089 9.78394 26.9062 9.78394Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-            </svg>
-          </label>
-        </button>
-        <button title='Direct' class="capabil-btn"> <span class="message-count">2</span>
+        <button title='Direct' class="capabil-btn to-direct"> <span class="message-count">2</span>
           <label for="direct">
             <input id="direct" type="radio" name="capabil">
             <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
@@ -69,7 +129,28 @@
             </svg>
           </label>
         </button>
-        <button title='Main Chat' class="capabil-btn">
+        <button title="Users Online" class="capabil-btn to-online-users">
+          <label for="online-users">
+            <input checked id="online-users" type="radio" name="capabil">
+            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.1251 15.865H6.36822C2.85674 15.865 0 18.7217 0 22.2331V31.7553H17.4305V23.3262C17.4305 21.2821 18.7057 19.5313 20.5019 18.8243C19.3709 17.0469 17.3836 15.865 15.1251 15.865Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M10.7467 3.24463C7.78979 3.24463 5.38416 5.65026 5.38416 8.60715C5.38416 11.564 7.78979 13.9697 10.7467 13.9697C13.7036 13.9697 16.1092 11.564 16.1092 8.60715C16.1092 5.65026 13.7036 3.24463 10.7467 3.24463Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M31.545 19.8712H22.2676C20.3625 19.8712 18.8126 21.4211 18.8126 23.3262V31.7554H21.4934H35.0001V23.3262C35.0001 21.4212 33.4501 19.8712 31.545 19.8712Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+              <path
+                d="M26.9062 9.78394C24.7235 9.78394 22.9478 11.5598 22.9478 13.7424C22.9478 15.9251 24.7235 17.7009 26.9062 17.7009C29.089 17.7009 30.8647 15.9251 30.8647 13.7424C30.8647 11.5597 29.089 9.78394 26.9062 9.78394Z"
+                fill="#BDBEC5" fill-opacity="0.8" />
+            </svg>
+          </label>
+        </button>
+
+        <!-- <button title='Main Chat' class="capabil-btn">
           <label for="main-chat">
             <input id="main-chat" type="radio" name="capabil">
             <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
@@ -82,7 +163,7 @@
                 fill="#BDBEC5" fill-opacity="0.8" />
             </svg>
           </label>
-        </button>
+        </button> -->
         <div class="user">
           <h3 class="user-name"></h3>
           <div class="user-avatar">
@@ -108,11 +189,11 @@
           <h5><span class="chat-member-count">22</span> members</h5>
         </div>
       </div>
-      <div class="chat-filter-wrp">
+      <form id="filter-form" action="#" class="chat-filter-wrp" method="dialog">
         <ul class="filter-variants">
           <li><input type="radio" name="filter" id="by-text" />
-            <input placeholder="Search by word" class="filter-input" type="text" />
-            <button class="filter-kind-btn">
+            <input placeholder="Search by word" class="filter-input" type="text" id="filter-by-text" />
+            <button class="filter-kind-btn" type="button">
               <label for="by-text">
                 <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -126,8 +207,8 @@
           </li>
           <li>
             <input type="radio" name="filter" id="by-user">
-            <input placeholder="Search by user" class="filter-input" type="text">
-            <button class="filter-kind-btn">
+            <input placeholder="Search by user" class="filter-input" type="text" id="filter-by-user">
+            <button class="filter-kind-btn" type="button">
               <label for="by-user">
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -145,10 +226,35 @@
             </button>
           </li>
           <li>
-            <input type="radio" name="filter" id="by-date">
-            <input class="filter-input" type="date">
-            <button class="filter-kind-btn">
-              <label for="by-date">
+            <input type="radio" name="filter" id="by-date-from">
+            <input class="filter-input" placeholder="dateFrom..." type="text" onfocus="(this.type='date')"
+              id="filter-date-from">
+            <button class="filter-kind-btn" type="button">
+              <label for="by-date-from">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M3.55959 20.775C-1.18658 16.0288 -1.18648 8.30597 3.55959 3.5597C8.30586 -1.18657 16.0287 -1.18657 20.7747 3.5597C24.8013 7.58627 25.4111 13.5748 22.6059 18.2512C22.6059 18.2512 22.4044 18.5893 22.6765 18.8612C24.2291 20.4137 28.8871 25.0718 28.8871 25.0718C30.1233 26.3079 30.4176 28.0364 29.3213 29.1328L29.1326 29.3213C28.0364 30.4178 26.3077 30.1236 25.0717 28.8874C25.0717 28.8874 20.4235 24.2391 18.8741 22.6898C18.589 22.4046 18.251 22.6062 18.251 22.6062C13.5747 25.4113 7.58616 24.8016 3.55959 20.775ZM18.5274 18.5276C22.0344 15.0206 22.0343 9.31435 18.5273 5.80735C15.0203 2.30043 9.31405 2.30034 5.80714 5.80735C2.30014 9.31426 2.30014 15.0206 5.80714 18.5276C9.31415 22.0344 15.0203 22.0344 18.5274 18.5276Z"
+                    fill="white" />
+                  <g clip-path="url(#clip0)">
+                    <path
+                      d="M16.2809 7.54035H14.9542V7.05485C14.9542 6.74968 14.6765 6.5 14.3371 6.5C13.9977 6.5 13.72 6.74968 13.72 7.05485V7.54035H10.2951V7.05485C10.2951 6.74968 10.0174 6.5 9.67803 6.5C9.33863 6.5 9.06094 6.74968 9.06094 7.05485V7.54035H7.73419C7.05538 7.54035 6.5 8.03972 6.5 8.65006V16.3903C6.5 17.0006 7.05538 17.5 7.73419 17.5H16.2655C16.9443 17.5 17.4997 17.0006 17.4997 16.3903V8.65006C17.5151 8.03972 16.9597 7.54035 16.2809 7.54035ZM16.2655 16.3764H7.73419V11.7156H16.2655V16.3764Z"
+                      fill="white" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0">
+                      <rect width="11" height="11" fill="white" transform="translate(6.5 6.5)" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </label>
+            </button>
+          </li>
+          <li>
+            <input type="radio" name="filter" id="by-date-to">
+            <input class="filter-input" placeholder="dateTo..." type="text" onfocus="(this.type='date')"
+              id="filter-date-to">
+            <button class="filter-kind-btn" type="button">
+              <label for="by-date-to">
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M3.55959 20.775C-1.18658 16.0288 -1.18648 8.30597 3.55959 3.5597C8.30586 -1.18657 16.0287 -1.18657 20.7747 3.5597C24.8013 7.58627 25.4111 13.5748 22.6059 18.2512C22.6059 18.2512 22.4044 18.5893 22.6765 18.8612C24.2291 20.4137 28.8871 25.0718 28.8871 25.0718C30.1233 26.3079 30.4176 28.0364 29.3213 29.1328L29.1326 29.3213C28.0364 30.4178 26.3077 30.1236 25.0717 28.8874C25.0717 28.8874 20.4235 24.2391 18.8741 22.6898C18.589 22.4046 18.251 22.6062 18.251 22.6062C13.5747 25.4113 7.58616 24.8016 3.55959 20.775ZM18.5274 18.5276C22.0344 15.0206 22.0343 9.31435 18.5273 5.80735C15.0203 2.30043 9.31405 2.30034 5.80714 5.80735C2.30014 9.31426 2.30014 15.0206 5.80714 18.5276C9.31415 22.0344 15.0203 22.0344 18.5274 18.5276Z"
@@ -168,13 +274,19 @@
             </button>
           </li>
         </ul>
-        <button class="filter-btn"></button>
-      </div>
+        <button class="filter-btn" type="button"></button>
+        <button class="filter-submit hide" type="submit"></button>
+      </form>
     </div>
   </header>
   <main class="chat-body">
     <section class="list-block">
-      <h2 class="block-title"><span class="online-member-count"></span></h2>
+
+
+      <div>
+        <h2 class="block-title"></h2>
+        <span class="online-member-count"></span>
+      </div>
       <template id="online-user-tpl">
         <div class="chats-list__item">
           <div class="chats-list__item__info">
@@ -202,7 +314,7 @@
             </div>
             <div class="msg-time-count">
               <time class="time-give-msg"></time>
-              <div class="count-of-personal-msg"></div>  
+              <div class="count-of-personal-msg"></div>
             </div>
           </div>
         </div>
@@ -218,40 +330,38 @@
         <div class="message-wrp">
           <div class="companion-message-block">
             <div class="companion-name"></div>
-            <pre
-              class="message"></pre>
+            <pre class="message"></pre>
             <div class="send-time"></div>
           </div>
         </div>
       </template>
-      
+
       <template id="my-chat-msg-tpl">
-      <div class="message-wrp me-message-wrp">
-        <div class="msg-sett-wrp">
-          <label class="msg-sett-label">
-            <input type="radio" name="me-msg">
-            <div class="settings-modal">
-              <ul class="settings-modal-list">
-                <li class="settings-modal-list__item">Edit</li>
-                <li class="settings-modal-list__item">Delete</li>
-              </ul>
-            </div>
-            <buttot class="msg-sett-btn">
-              <span class="msg-sett-btn-dot"></span>
-              <span class="msg-sett-btn-dot"></span>
-              <span class="msg-sett-btn-dot"></span>
-            </buttot>
-          </label>
+        <div class="message-wrp me-message-wrp">
+          <div class="msg-sett-wrp">
+            <label class="msg-sett-label">
+              <input type="radio" onclick="clickRadio(this)" name="me-msg">
+              <div class="settings-modal">
+                <ul class="settings-modal-list">
+                  <li class="settings-modal-list__item">Edit</li>
+                  <li class="settings-modal-list__item">Delete</li>
+                </ul>
+              </div>
+              <buttot class="msg-sett-btn">
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+                <span class="msg-sett-btn-dot"></span>
+              </buttot>
+            </label>
+          </div>
+          <div class="me-message-block">
+            <pre class="message"></pre>
+            <div class="send-time"></div>
+          </div>
         </div>
-        <div class="me-message-block">
-          <pre
-            class="message"></pre>
-          <div class="send-time"></div>
-        </div>
-      </div>
       </template>
       <div class="chat-field">
-        
+
       </div>
       <form id="text-send-block" action="#">
         <textarea autofocus autocomplete="off" id="text-send-input" placeholder="Type a message here..."></textarea>
@@ -280,15 +390,15 @@
         </div>
       </div>
       <ul class="mobile-menu-list mobile-menu-list_signed">
-        <li><span class="message-count">1</span>Direct</li>
-        <li>Main Chat</li>
-        <li>Online Users</li>
-        <li>Sign Out</li>
+        <li><span class="message-count">1</span><button class="to-direct">Direct</button></li>
+        <li> <button class="to-main-window">Main Chat</button></li>
+        <li> <button class="to-online-users">Online Users</button> </li>
+        <li> <button class="sign-out-btn"> Sign Out</button></li>
       </ul>
       <ul class="mobile-menu-list mobile-menu-list_unsigned">
-        <li>Log In</li>
-        <li>Main Chat</li>
-        <li>Online Users</li>
+        <li> <button class="to-login-window">Log In</button></li>
+        <li> <button class="to-main-window">Main Chat</button></li>
+        <li> <button class="to-online-users">Online Users</button> </li>
       </ul>
       <ul class="footer-links">
         <li class="footer-links__item"><a href="index.html"><span class="chat-icon"></span>MyChat</a></li>
@@ -300,9 +410,9 @@
 
     </nav>
   </section>
-  
-  <script type="module" src="../scriptDOM.js"></script>
-  <script src="script.js"></script>
+  <script src="../allLogic.js"></script>
+  <script src="./script.js"></script>
+
 </body>
 
 </html>

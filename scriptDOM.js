@@ -112,39 +112,46 @@ const activeUsers = new ActiveUsersView('chats-list');
 const headerView = new HeaderView('user-name');
 const messagesView = new MessagesView('chat-field');
 const chatMessagesView = new ChatMessagesView('chats-list');
-
-function setCurrentUser(user) {
+const signUpWrong = document.getElementById('sign-up-warning');
+window.setCurrentUser = (user)=> {
   msgExemple.user = user;
   return headerView.display(user);
-}
-function showActiveUsers() {
+};
+window.showActiveUsers = ()=> {
   return activeUsers.display(userList.activeUsers);
-}
-function showMessages(skip = 0, top = 10, filterConfig = {}) {
+};
+window.showMessages = (skip = 0, top = 10, filterConfig = {})=> {
   return messagesView.display(msgExemple.getPage(skip, top, filterConfig));
-}
-function addMessage(obj) {
+};
+window.addMessage = (obj)=> {
   msgExemple.add(obj);
   return messagesView.display(msgExemple.getPage());
-}
-function removeMessage(id) {
+};
+window.removeMessage = (id)=> {
   msgExemple.remove(id);
   return messagesView.display(msgExemple.getPage());
-}
-function editMessage(id, msg) {
+};
+window.editMessage = (id, msg)=> {
   msgExemple.edit(id, msg);
   return messagesView.display(msgExemple.getPage());
-}
+};
+
+// class Controller {
+//   constructor() {
+//     this.model = new MessagesModel(messages);
+//     this.headerView = new HeaderView();
+//   }
+// }
 
 // chatMessagesView.display(messages); // for me...
 // setCurrentUser('Jonh Snow');
-setCurrentUser('Aleksandr Kupchenya');
-showActiveUsers();
-editMessage('6', { text: '10 мин!' });
-removeMessage('1'); // удалит сообщ привет
-addMessage({ text: 'Dobroe ytro' });
-addMessage({ text: 'Dobryi vezher' });
-showMessages(0, 20);
+// setCurrentUser('Aleksandr Kupchenya');
+// // showActiveUsers();
+// editMessage('6', { text: '10 мин!' });
+// removeMessage('1'); // удалит сообщ привет
+// addMessage({ text: 'Dobroe ytro' });
+// addMessage({ text: 'Dobryi vezher' });
+// showMessages(0, 10);
 // showMessages(10,10);
 // showMessages(0,10,{author:'Aleks'});
 // showMessages(0,10,{author:'Лях'});
