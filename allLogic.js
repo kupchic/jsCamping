@@ -24,13 +24,9 @@ class Message {
 
 class MessagesModel {
   constructor() {
-    this._arr = JSON.parse(localStorage.messages, function (key, value) {
-      if (key === '_createdAt') {
-        return new Date(value);
-      }
-      return value;
-    }).map(item=> new Message(item));
+    this._arr = localStorage.messages;
     this._user = localStorage.currentUser;
+    this.restore();
   }
 
   get arr() {
@@ -78,9 +74,14 @@ class MessagesModel {
     localStorage.setItem('messages', JSON.stringify(this.arr));
   }
 
-  // restore(){
-
-  // }
+  restore() {
+    this.arr = JSON.parse(localStorage.messages, function (key, value) {
+      if (key === '_createdAt') {
+        return new Date(value);
+      }
+      return value;
+    }).map(item=> new Message(item));
+  }
 
   remove(id) {
     this.arr.splice(
@@ -215,16 +216,16 @@ class MessagesView {
     const chatView = new DocumentFragment();
     const userName = localStorage.getItem('currentUser');
     for (let i = 0; i < params.length; i++) {
-      if (params[i]._author === userName /* || (params[i]._author !== userName && localStorage.currentUser !== 'null') */) {
+      if (params[i]._author === userName) {
         let myMsgChildren = myMsgTpl.content.cloneNode(true);
         myMsgChildren.querySelector('.message').textContent = params[i].text;
-        myMsgChildren.querySelector('.send-time').textContent = `${params[i].createdAt.getHours()}:${String(params[i].createdAt.getMinutes()).length === 2 ? params[i].createdAt.getMinutes() : '0' + params[i].createdAt.getMinutes()} ${params[i].createdAt.getHours() > 12 ? 'PM' : 'AM'}`;
+        myMsgChildren.querySelector('.send-time').textContent = `${new Date(params[i].createdAt).getHours()}:${String(new Date(params[i].createdAt).getMinutes()).length === 2 ? new Date(params[i].createdAt).getMinutes() : '0' + new Date(params[i].createdAt).getMinutes()} ${new Date(params[i].createdAt).getHours() > 12 ? 'PM' : 'AM'}`;
         chatView.appendChild(myMsgChildren);
       } else if (params[i]._author !== userName) {
         let companionMsgChildren = companionMsgTpl.content.cloneNode(true);
         companionMsgChildren.querySelector('.companion-name').textContent = params[i]._author;
         companionMsgChildren.querySelector('.message').textContent = params[i].text;
-        companionMsgChildren.querySelector('.send-time').textContent = `${params[i]._createdAt.getHours()}:${String(params[i].createdAt.getMinutes()).length === 2 ? params[i].createdAt.getMinutes() : '0' + params[i].createdAt.getMinutes()} ${params[i].createdAt.getHours() > 12 ? 'PM' : 'AM'}`;
+        companionMsgChildren.querySelector('.send-time').textContent = `${ new Date(params[i].createdAt).getHours()}:${String(new Date(params[i].createdAt).getMinutes()).length === 2 ? new Date(params[i].createdAt).getMinutes() : '0' + new Date(params[i].createdAt).getMinutes()} ${new Date(params[i].createdAt).getHours() > 12 ? 'PM' : 'AM'}`;
         chatView.appendChild(companionMsgChildren);
       }
     }
@@ -719,8 +720,8 @@ filterForm.addEventListener('submit', (event)=>{
   Object.keys(typesFilter).forEach(key=>{
     if (typesFilter[key].value) {
       objforFilter[key] = typesFilter[key].value;
+      typesFilter[key].value = '';
     }
   });
-
   controller.showMessages(0, 10, objforFilter);
 });
