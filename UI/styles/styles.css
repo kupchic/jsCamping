@@ -664,7 +664,8 @@ input[name='me-msg']:checked input[name='me-msg']:root {
   color: rgba(0, 0, 0, 0.4);
 }
 
-#submit-btn {
+#submit-btn,
+#edit-btn {
   position: absolute;
   width: 3.8rem;
   height: 3.8rem;

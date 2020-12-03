@@ -49,11 +49,11 @@ class MessagesModel {
     const validateObj = {
       text: (item) => item.text && item.text.length <= 200 && item.text.length !== 0
     };
-    if (msg.isPersonal) {
-      if (typeof msg.isPersonal !== 'boolean' || (msg.isPersonal && !(msg.to && typeof msg.to === 'string' && msg.to.length > 0))) {
-        return false;
-      }
-    }
+    // if (msg.isPersonal) {
+    //   if (typeof msg.isPersonal !== 'boolean' || (msg.isPersonal && !(msg.to && typeof msg.to === 'string' && msg.to.length > 0))) {
+    //     return false;
+    //   }
+    // }
     return Object.keys(validateObj).every((key) => validateObj[key](msg));
   }
 
@@ -87,6 +87,7 @@ class MessagesModel {
     this.arr.splice(
       this.arr.findIndex(item => item.id === id), 1
     );
+    this.save();
     return this.arr;
   }
 
@@ -106,6 +107,7 @@ class MessagesModel {
         editedItem[key] = msg[key];
         return editedItem;
       });
+      this.save();
       return editedItem;
     }
     return false;
@@ -219,6 +221,7 @@ class MessagesView {
       if (params[i]._author === userName) {
         let myMsgChildren = myMsgTpl.content.cloneNode(true);
         myMsgChildren.querySelector('.message').textContent = params[i].text;
+        myMsgChildren.querySelector('.message').setAttribute('id', `${params[i]._id}`);
         myMsgChildren.querySelector('.send-time').textContent = `${new Date(params[i].createdAt).getHours()}:${String(new Date(params[i].createdAt).getMinutes()).length === 2 ? new Date(params[i].createdAt).getMinutes() : '0' + new Date(params[i].createdAt).getMinutes()} ${new Date(params[i].createdAt).getHours() > 12 ? 'PM' : 'AM'}`;
         chatView.appendChild(myMsgChildren);
       } else if (params[i]._author !== userName) {
@@ -480,7 +483,6 @@ class Controller {
 
   addMessage(obj) {
     return this.model.add(obj);
-    // /* return */this.messagesView.display(this.model.getPage());
   }
 
   removeMessage(id) {
@@ -701,9 +703,36 @@ const filterByUser = document.getElementById('filter-by-user');
 const filterByText = document.getElementById('filter-by-text');
 const filterFromDate = document.getElementById('filter-date-from');
 const filterToDate = document.getElementById('filter-date-to');
+const filterForm = document.getElementById('filter-form');
+const filterSubmit = document.querySelector('.filter-submit');
 
-let filterForm = document.getElementById('filter-form');
-let filterSubmit = document.querySelector('.filter-submit');
+const chatField = document.querySelector('.chat-field');
+const editBtn = document.getElementById('edit-btn');
+let meMsgId;
+chatField.addEventListener('click', (event)=>{
+  let target = event.target.closest('div');
+  if (target.className === 'msg-sett-wrp') {
+    meMsgId = target.parentNode.childNodes[3].children[0].getAttribute('id');
+  }
+
+  if (event.target.className === 'settings-modal-list__item edit-msg') {
+    sendMsgInput.value = document.getElementById(`${meMsgId}`).textContent;
+    editBtn.classList.remove('hide');
+    editBtn.addEventListener('click', ()=>{
+      controller.editMessage(meMsgId, { text: sendMsgInput.value });
+      controller.showMessages();
+      editBtn.classList.add('hide');
+      sendMsgInput.value = '';
+      // editBtn.removeEventListener('click');
+    });
+  } else if (event.target.className === 'settings-modal-list__item delete-msg') {
+    controller.removeMessage(meMsgId);
+    controller.showMessages();
+  }
+
+  // console.log(meMsgId);
+});
+console.log(meMsgId);
 
 filterForm.addEventListener('submit', (event)=>{
   event.preventDefault();

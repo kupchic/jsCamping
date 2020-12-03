@@ -343,8 +343,8 @@
               <input type="radio" onclick="clickRadio(this)" name="me-msg">
               <div class="settings-modal">
                 <ul class="settings-modal-list">
-                  <li class="settings-modal-list__item">Edit</li>
-                  <li class="settings-modal-list__item">Delete</li>
+                  <li class="settings-modal-list__item edit-msg">Edit</li>
+                  <li class="settings-modal-list__item delete-msg">Delete</li>
                 </ul>
               </div>
               <buttot class="msg-sett-btn">
@@ -366,6 +366,7 @@
       <form id="text-send-block" action="#">
         <textarea autofocus autocomplete="off" id="text-send-input" placeholder="Type a message here..."></textarea>
         <button id="submit-btn" type="submit"></button>
+        <button id="edit-btn" class="hide" type="button"></button>
       </form>
     </section>
   </main>
