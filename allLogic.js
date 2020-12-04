@@ -49,11 +49,11 @@ class MessagesModel {
     const validateObj = {
       text: (item) => item.text && item.text.length <= 200 && item.text.length !== 0
     };
-    if (msg.isPersonal) {
-      if (typeof msg.isPersonal !== 'boolean' || (msg.isPersonal && !(msg.to && typeof msg.to === 'string' && msg.to.length > 0))) {
-        return false;
-      }
-    }
+    // if (msg.isPersonal) {
+    //   if (typeof msg.isPersonal !== 'boolean' || (msg.isPersonal && !(msg.to && typeof msg.to === 'string' && msg.to.length > 0))) {
+    //     return false;
+    //   }
+    // }
     return Object.keys(validateObj).every((key) => validateObj[key](msg));
   }
 
@@ -87,6 +87,7 @@ class MessagesModel {
     this.arr.splice(
       this.arr.findIndex(item => item.id === id), 1
     );
+    this.save();
     return this.arr;
   }
 
@@ -106,6 +107,7 @@ class MessagesModel {
         editedItem[key] = msg[key];
         return editedItem;
       });
+      this.save();
       return editedItem;
     }
     return false;
@@ -219,6 +221,7 @@ class MessagesView {
       if (params[i]._author === userName) {
         let myMsgChildren = myMsgTpl.content.cloneNode(true);
         myMsgChildren.querySelector('.message').textContent = params[i].text;
+        myMsgChildren.querySelector('.message').setAttribute('id', `${params[i]._id}`);
         myMsgChildren.querySelector('.send-time').textContent = `${new Date(params[i].createdAt).getHours()}:${String(new Date(params[i].createdAt).getMinutes()).length === 2 ? new Date(params[i].createdAt).getMinutes() : '0' + new Date(params[i].createdAt).getMinutes()} ${new Date(params[i].createdAt).getHours() > 12 ? 'PM' : 'AM'}`;
         chatView.appendChild(myMsgChildren);
       } else if (params[i]._author !== userName) {
@@ -259,6 +262,101 @@ class ChatMessagesView { // for me...
     }
     document.querySelector(`.${this.id}`).innerHTML = '';
     document.querySelector(`.${this.id}`).appendChild(messageExample);
+  }
+}
+
+class ChatWith {
+  constructor() {
+    this.chatPerson = document.querySelector('.chat-description .chat-name h4');
+    this.firstletterAvatar = document.querySelector('.chat-description .user-avatar .user-avatar_first-letter');
+    this.secondLetterAvatar = document.querySelector('.chat-description .user-avatar .user-avatar_second-letter');
+    this.members = document.querySelector('.chat-description .chat-name h5');
+  }
+
+  display(name) {
+    this.chatPerson.innerHTML = `${name.split(' ')[0]}<br>${name.split(' ')[1]}`;
+    this.firstletterAvatar.textContent = name.split(' ')[0][0];
+    this.secondLetterAvatartextContent = name.split(' ')[1][0];
+    this.members.classList.add('hide');
+  }
+}
+
+class Controller {
+  constructor() {
+    this.model = new MessagesModel();
+    this.headerView = new HeaderView('user-name');
+    this.messagesView = new MessagesView('chat-field');
+    this.userList = new UserList(JSON.parse(localStorage.allUsers), JSON.parse(localStorage.onlineUsers));
+    this.activeUsers = new ActiveUsersView('chats-list');
+    this.chatMessagesView = new ChatMessagesView('chats-list');
+    this.chatWith = new ChatWith();
+    this.count = 10;
+    this.memberCount = this.userList.users.length;
+    this.mainChatName = 'JS Camping';
+    this.chatName = document.querySelector('.chat-description .chat-name h4');
+    this.memberCountWrp = document.querySelector('.chat-member-count');
+  }
+
+  setCurrentUser(user = localStorage.currentUser) {
+    localStorage.setItem('currentUser', user);
+    this.model.user = user;
+    return this.headerView.display(user);
+  }
+
+  showActiveUsers() {
+    return this.activeUsers.display(this.userList.activeUsers);
+  }
+
+  showMessages(skip = 0, top = this.count, filterConfig = {}) {
+    return this.messagesView.display(this.model.getPage(skip, top, filterConfig));
+  }
+
+  addMessage(obj) {
+    return this.model.add(obj);
+  }
+
+  removeMessage(id) {
+    this.model.remove(id);
+    return this.messagesView.display(this.model.getPage());
+  }
+
+  editMessage(id, msg) {
+    this.model.edit(id, msg);
+    return this.messagesView.display(this.model.getPage());
+  }
+
+  personalChatsView() {
+    return this.chatMessagesView.display(JSON.parse(localStorage.messages));
+  }
+
+  logOut() {
+    this.setCurrentUser(JSON.stringify(null));
+    this.showActiveUsers();
+    this.showMessages();
+  }
+
+  logIn(value) {
+    this.setCurrentUser(value);
+    this.showMessages();
+    this.showActiveUsers();
+  }
+
+  loadMore() {
+    this.count -= 10;
+    this.showMessages();
+  }
+
+  chatWithWho(name) {
+    return this.chatWith.display(name);
+  }
+
+  toMainChat() {
+    this.chatName.textContent = this.mainChatName;
+    this.memberCountWrp.textContent = this.memberCount;
+    this.memberCountWrp.parentNode.classList.remove('hide');
+    this.chatWith.firstletterAvatar.textContent = this.mainChatName.split(' ')[0][0];
+    this.chatWith.firstletterAvatar.textContent = this.mainChatName.split(' ')[0][0];
+    // this.chatWith.secondletterAvatar.textContent = this.mainChatName.split(' ')[1][0];
   }
 }
 
@@ -433,10 +531,8 @@ let messages = [{
 }
 
 ];
-
 let allUsers = ['Dima Tu', 'Zhenya Zh.', 'Zhenya H.', 'Sasha Kupchenya', 'Pasha  Komar'];
 let onlineUsers = ['Dima Tu', 'Zhenya Zh.', 'Daria Shurova'];
-
 let localSave = {
   currentUser: null,
   messages: messages,
@@ -451,73 +547,13 @@ function savetoLocalStorage() {
     }
   });
 }
-savetoLocalStorage();
-
-class Controller {
-  constructor() {
-    this.model = new MessagesModel();
-    this.headerView = new HeaderView('user-name');
-    this.messagesView = new MessagesView('chat-field');
-    this.userList = new UserList(allUsers, onlineUsers);
-    this.activeUsers = new ActiveUsersView('chats-list');
-    this.chatMessagesView = new ChatMessagesView('chats-list');
-    this.count = 10;
-  }
-
-  setCurrentUser(user = localStorage.currentUser) {
-    localStorage.setItem('currentUser', user);
-    this.model.user = user;
-    return this.headerView.display(user);
-  }
-
-  showActiveUsers() {
-    return this.activeUsers.display(this.userList.activeUsers);
-  }
-
-  showMessages(skip = 0, top = this.count, filterConfig = {}) {
-    return this.messagesView.display(this.model.getPage(skip, top, filterConfig));
-  }
-
-  addMessage(obj) {
-    return this.model.add(obj);
-    // /* return */this.messagesView.display(this.model.getPage());
-  }
-
-  removeMessage(id) {
-    this.model.remove(id);
-    return this.messagesView.display(this.model.getPage());
-  }
-
-  editMessage(id, msg) {
-    this.model.edit(id, msg);
-    return this.messagesView.display(this.model.getPage());
-  }
-
-  personalChatsView() {
-    return this.chatMessagesView.display(JSON.parse(localStorage.messages));
-  }
-
-  logOut() {
-    this.setCurrentUser(JSON.stringify(null));
-    this.showActiveUsers();
-    this.showMessages();
-  }
-
-  logIn(value) {
-    this.setCurrentUser(value);
-    this.showMessages();
-    this.showActiveUsers();
-  }
-
-  loadMore() {
-    this.count -= 10;
-    this.showMessages();
-  }
-}
 
 const controller = new Controller();
 controller.showMessages();
 controller.setCurrentUser();
+controller.showActiveUsers();
+controller.toMainChat();
+savetoLocalStorage();
 
 const linkToLogin = document.querySelector('.link-to-login-widow');
 const logInWindow = document.querySelector('.login-window');
@@ -546,8 +582,19 @@ const msgForm = document.getElementById('text-send-block');
 const inputsCollection = document.querySelectorAll('input');
 const loadMore = document.getElementById('load-msg-link');
 
+const filterByUser = document.getElementById('filter-by-user');
+const filterByText = document.getElementById('filter-by-text');
+const filterFromDate = document.getElementById('filter-date-from');
+const filterToDate = document.getElementById('filter-date-to');
+const filterForm = document.getElementById('filter-form');
+const filterSubmit = document.querySelector('.filter-submit');
+
+const chatField = document.querySelector('.chat-field');
+const editBtn = document.getElementById('edit-btn');
+let meMsgId;
+
 function validateInputs() {
-  inputsCollection.forEach(item=>{
+  return inputsCollection.forEach(item=>{
     item.addEventListener('input', () => {
       if (item.value === '') {
         item.classList.add('unvalidate');
@@ -557,15 +604,15 @@ function validateInputs() {
 }
 
 function setRequired() {
-  inputsCollection.forEach(item=>{
+  return inputsCollection.forEach(item=>{
     item.setAttribute('required', '');
   });
 }
 
 function loginWindowShow() {
-  validateInputs();
   signUpWindow.classList.add('hide');
   logInWindow.classList.remove('hide');
+  validateInputs();
 }
 
 function signupWindowShow() {
@@ -622,6 +669,8 @@ function loginUserPanel(item) {
   let target = item.target;
   if (target.id === 'online-users') {
     controller.showActiveUsers();
+    controller.showMessages();
+    controller.toMainChat();
   } else if (target.id === 'direct') {
     controller.personalChatsView();
   } else if (target.id === 'log-out') {
@@ -637,12 +686,27 @@ function login(value) {
   linkToLogin.classList.add('hide');
   loginAuthorPanel.classList.remove('hide');
   controller.logIn(value);
+
   listenerRemove();
   inputsCollection.forEach(item=>{
     item.value = '';
     item.removeAttribute('required');
   });
 }
+
+function personalChatOn(elem) {
+  if (controller.model.user !== 'null') {
+    let persona = elem.children[0].children[1].childNodes[1].textContent;
+    controller.chatWithWho(persona);
+    controller.showMessages(0, 10, { author: persona });
+    document.querySelectorAll('.capabyil-btn input[name="capabil"]').forEach(item=>item.removeAttribute('checked'));
+    return true;
+  }
+  return false;
+}
+
+listenerAdd();
+
 if (localStorage.currentUser !== 'null') {
   loginAuthorPanel.classList.remove('hide');
   linkToLogin.classList.add('hide');
@@ -650,8 +714,6 @@ if (localStorage.currentUser !== 'null') {
   loginAuthorPanel.classList.add('hide');
   linkToLogin.classList.remove('hide');
 }
-listenerAdd();
-controller.showActiveUsers();
 
 signUpForm.addEventListener('submit', (event)=> {
   event.preventDefault();
@@ -686,7 +748,7 @@ logInForm.addEventListener('submit', (event)=>{
 loginAuthorPanel.addEventListener('click', loginUserPanel);
 msgForm.addEventListener('submit', (event)=>{
   event.preventDefault();
-  if (sendMsgInput.value && controller.model.user) {
+  if (sendMsgInput.value && controller.model.user !== 'null') {
     controller.addMessage({ text: sendMsgInput.value });
     controller.showMessages();
     sendMsgInput.value = '';
@@ -697,13 +759,28 @@ loadMore.addEventListener('click', ()=>{
   controller.showMessages();
 });
 
-const filterByUser = document.getElementById('filter-by-user');
-const filterByText = document.getElementById('filter-by-text');
-const filterFromDate = document.getElementById('filter-date-from');
-const filterToDate = document.getElementById('filter-date-to');
+chatField.addEventListener('click', (event)=>{
+  let target = event.target.closest('div');
+  if (target.className === 'msg-sett-wrp') {
+    meMsgId = target.parentNode.childNodes[3].children[0].getAttribute('id');
+  }
 
-let filterForm = document.getElementById('filter-form');
-let filterSubmit = document.querySelector('.filter-submit');
+  if (event.target.className === 'settings-modal-list__item edit-msg') {
+    sendMsgInput.value = document.getElementById(`${meMsgId}`).textContent;
+    sendMsgInput.focus();
+    editBtn.classList.remove('hide');
+    editBtn.addEventListener('click', ()=>{
+      controller.editMessage(meMsgId, { text: sendMsgInput.value });
+      controller.showMessages();
+      editBtn.classList.add('hide');
+      sendMsgInput.value = '';
+      // editBtn.removeEventListener('click');
+    });
+  } else if (event.target.className === 'settings-modal-list__item delete-msg') {
+    controller.removeMessage(meMsgId);
+    controller.showMessages();
+  }
+});
 
 filterForm.addEventListener('submit', (event)=>{
   event.preventDefault();
