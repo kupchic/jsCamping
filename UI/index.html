@@ -149,21 +149,6 @@
             </svg>
           </label>
         </button>
-
-        <!-- <button title='Main Chat' class="capabil-btn">
-          <label for="main-chat">
-            <input id="main-chat" type="radio" name="capabil">
-            <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M30.6251 6.5625V17.5C30.6251 21.1181 27.6807 24.0625 24.0626 24.0625H14.3391L9.52881 28.1837C9.97506 28.3369 10.4432 28.4375 10.9376 28.4375H21.4704L28.8182 34.7375C29.0216 34.9103 29.2754 35 29.5313 35C29.6866 35 29.8441 34.9672 29.9885 34.8994C30.3779 34.7222 30.6251 34.3328 30.6251 33.9062V28.4375C33.0379 28.4375 35.0001 26.4753 35.0001 24.0625V10.9375C35.0001 8.52469 33.0379 6.5625 30.6251 6.5625Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-              <path
-                d="M24.0625 0H4.375C1.96219 0 0 1.96219 0 4.375V17.5C0 19.9128 1.96219 21.875 4.375 21.875V27.3438C4.375 27.7703 4.62437 28.1597 5.01156 28.3369C5.15812 28.4047 5.31344 28.4375 5.46875 28.4375C5.72469 28.4375 5.97844 28.3478 6.17969 28.175L13.5297 21.875H24.0625C26.4753 21.875 28.4375 19.9128 28.4375 17.5V4.375C28.4375 1.96219 26.4753 0 24.0625 0ZM16.4062 13.125H7.65625C7.0525 13.125 6.5625 12.635 6.5625 12.0312C6.5625 11.4275 7.0525 10.9375 7.65625 10.9375H16.4062C17.01 10.9375 17.5 11.4275 17.5 12.0312C17.5 12.635 17.01 13.125 16.4062 13.125ZM20.7812 8.75H7.65625C7.0525 8.75 6.5625 8.26 6.5625 7.65625C6.5625 7.0525 7.0525 6.5625 7.65625 6.5625H20.7812C21.385 6.5625 21.875 7.0525 21.875 7.65625C21.875 8.26 21.385 8.75 20.7812 8.75Z"
-                fill="#BDBEC5" fill-opacity="0.8" />
-            </svg>
-          </label>
-        </button> -->
         <div class="user">
           <h3 class="user-name"></h3>
           <div class="user-avatar">
@@ -227,8 +212,8 @@
           </li>
           <li>
             <input type="radio" name="filter" id="by-date-from">
-            <input class="filter-input" placeholder="dateFrom..." type="text" onfocus="(this.type='date')"
-              id="filter-date-from">
+            <input class="filter-input" placeholder="Date from..." type="text" onfocus="(this.type='date')"
+              onblur="(this.type = 'text')" id="filter-date-from">
             <button class="filter-kind-btn" type="button">
               <label for="by-date-from">
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -251,8 +236,8 @@
           </li>
           <li>
             <input type="radio" name="filter" id="by-date-to">
-            <input class="filter-input" placeholder="dateTo..." type="text" onfocus="(this.type='date')"
-              id="filter-date-to">
+            <input class="filter-input" placeholder="Date to..." type="text" onfocus="(this.type='date')"
+              onblur="(this.type = 'text')" id="filter-date-to">
             <button class="filter-kind-btn" type="button">
               <label for="by-date-to">
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -288,7 +273,7 @@
         <span class="online-member-count"></span>
       </div>
       <template id="online-user-tpl">
-        <div class="chats-list__item">
+        <div class="chats-list__item" onclick="personalChatOn(this)">
           <div class="chats-list__item__info">
             <div class="user-avatar online-user-avatar">
               <span class="user-avatar_first-letter"></span>
@@ -302,7 +287,7 @@
         </div>
       </template>
       <template id="chat-user-tpl">
-        <div class="chats-list__item">
+        <div class="chats-list__item" onclick="personalChatOn(this)">
           <div class="chats-list__item__info">
             <div class="user-avatar ">
               <span class="user-avatar_first-letter"></span>

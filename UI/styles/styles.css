@@ -191,6 +191,7 @@ input[name='capabil']:checked~.capabil-icon>path {
 
 .filter-btn,
 .filter-submit {
+  z-index: 20;
   transform: scale(1.1);
   cursor: pointer;
   outline: none;
@@ -220,6 +221,7 @@ input[name='capabil']:checked~.capabil-icon>path {
   border-top-left-radius: 1.75rem;
   border-bottom-left-radius: 1.75rem;
   margin-right: -3.5rem;
+  z-index: 10;
 }
 
 .filter-variants_active {
@@ -507,6 +509,7 @@ input[name='filter']:checked~.filter-kind-btn {
   font-family: var(--russo);
   margin-bottom: 0.5rem;
   padding-right: 2.1429rem;
+  white-space: nowrap;
 }
 
 .message {
@@ -1211,13 +1214,16 @@ label[for="menu-btn"] {
     --padding: 1.2rem
   }
 
-  .companion-message-block,
-  .me-message-block {
-    min-width: 16rem;
-  }
-
   .filter-kind-btn {
     transform: scale(0.8);
   }
 
+  .filter-variants li {
+    margin-right: 1rem;
+  }
+
+  .companion-message-block,
+  .me-message-block {
+    max-width: 90%;
+  }
 }
