@@ -24,8 +24,8 @@ class Message {
 
 class MessagesModel {
   constructor() {
-    this._arr = localStorage.messages;
-    this._user = localStorage.currentUser;
+    this._arr = [];
+    this._user = null;
     this.restore();
   }
 
@@ -268,15 +268,15 @@ class ChatMessagesView { // for me...
 class ChatWith {
   constructor() {
     this.chatPerson = document.querySelector('.chat-description .chat-name h4');
-    this.firstletterAvatar = document.querySelector('.chat-description .user-avatar .user-avatar_first-letter');
+    this.firstLetterAvatar = document.querySelector('.chat-description .user-avatar .user-avatar_first-letter');
     this.secondLetterAvatar = document.querySelector('.chat-description .user-avatar .user-avatar_second-letter');
     this.members = document.querySelector('.chat-description .chat-name h5');
   }
 
   display(name) {
     this.chatPerson.innerHTML = `${name.split(' ')[0]}<br>${name.split(' ')[1]}`;
-    this.firstletterAvatar.textContent = name.split(' ')[0][0];
-    this.secondLetterAvatartextContent = name.split(' ')[1][0];
+    this.firstLetterAvatar.textContent = name.split(' ')[0][0];
+    this.secondLetterAvatar.textContent = name.split(' ')[1][0];
     this.members.classList.add('hide');
   }
 }
@@ -326,7 +326,7 @@ class Controller {
   }
 
   personalChatsView() {
-    return this.chatMessagesView.display(JSON.parse(localStorage.messages));
+    return this.chatMessagesView.display(this.model.arr);
   }
 
   logOut() {
@@ -354,9 +354,9 @@ class Controller {
     this.chatName.textContent = this.mainChatName;
     this.memberCountWrp.textContent = this.memberCount;
     this.memberCountWrp.parentNode.classList.remove('hide');
-    this.chatWith.firstletterAvatar.textContent = this.mainChatName.split(' ')[0][0];
-    this.chatWith.firstletterAvatar.textContent = this.mainChatName.split(' ')[0][0];
-    // this.chatWith.secondletterAvatar.textContent = this.mainChatName.split(' ')[1][0];
+    this.chatWith.firstLetterAvatar.textContent = this.mainChatName.split(' ')[0][0];
+    // this.chatWith.firstletterAvatar.textContent = this.mainChatName.split(' ')[0][0];
+    this.chatWith.secondLetterAvatar.textContent = this.mainChatName.split(' ')[1][0];
   }
 }
 
@@ -547,13 +547,13 @@ function savetoLocalStorage() {
     }
   });
 }
+savetoLocalStorage();
 
 const controller = new Controller();
 controller.showMessages();
 controller.setCurrentUser();
 controller.showActiveUsers();
 controller.toMainChat();
-savetoLocalStorage();
 
 const linkToLogin = document.querySelector('.link-to-login-widow');
 const logInWindow = document.querySelector('.login-window');
