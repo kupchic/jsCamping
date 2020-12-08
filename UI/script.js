@@ -1,9 +1,7 @@
 const filterBtnOpen = document.querySelector('.filter-btn');
 const filterBtnSubmit = document.querySelector('.filter-submit');
 const filterInputsList = document.querySelectorAll('input[name="filter"]');
-const chatNameBlock = document.querySelector('.chat-description');
 const chat = document.querySelector('.chat-field');
-const chatScroll = document.querySelector('.chat-field').scrollHeight;
 const loadMoreMsgLink = document.getElementById('load-msg-link');
 const sideMenuWrapper = document.querySelector('.mobile-menu-wrp');
 const sideMenu = document.querySelector('.mobile-menu');
@@ -21,20 +19,20 @@ filterBtnOpen.addEventListener('click', () => {
   }
 });
 
-setTimeout(() =>{
-  chat.scrollTop = (chatScroll);
-  chat.addEventListener('scroll', () => {
-    if (chat.scrollTop > 30) {
-      loadMoreMsgLink.style.display = 'none';
-    } else loadMoreMsgLink.style.display = 'inline';
-  });
-}, 10);
-chat.scrollTop = (chatScroll);
 chat.addEventListener('scroll', () => {
-  if (chat.scrollTop > 30) {
-    loadMoreMsgLink.style.display = 'none';
-  } else loadMoreMsgLink.style.display = 'inline';
+  if (0 + chat.scrollTop < -400) {
+    loadMoreMsgLink.style.display = 'inline';
+  } else loadMoreMsgLink.style.display = 'none';
 });
+
+function mobileToMainChat() {
+  document.querySelector('.mobile-menu-wrp').classList.remove('open');
+  setTimeout(()=>{
+    sideMenuWrapper.style.display = 'none';
+  }, 500);
+  sideMenu.style.transform = 'translateX(0px)';
+  sideMenuWrapper.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+}
 
 if (document.documentElement.clientWidth < 1000) {
   window.addEventListener('click', (event) => {

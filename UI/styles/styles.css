@@ -377,6 +377,9 @@ input[name='filter']:checked~.filter-kind-btn {
   letter-spacing: 0.05rem;
   margin-bottom: 5px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 17.7143rem;
 }
 
 .write-to-btn,
@@ -450,6 +453,10 @@ input[name='filter']:checked~.filter-kind-btn {
 
 /* chat  */
 
+.message-wrp:last-of-type {
+  padding-top: 50px;
+}
+
 .chat-field {
   height: 100%;
   padding: var(--padding);
@@ -459,6 +466,8 @@ input[name='filter']:checked~.filter-kind-btn {
   scrollbar-color: #bdbec5da #f1f1f1;
   scrollbar-width: thin;
   margin: 3px 3px 10px 0;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .chat-field::-webkit-scrollbar {
