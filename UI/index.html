@@ -22,12 +22,12 @@
           <div class="input-wrp">
             <label for="login-input-of-login" class="input-title">Login</label>
             <label>
-              <input type="text" class="input unvalidate" id="login-input-of-login" pattern="^\S+ \S+$">
+              <input name="name" type="text" class="input unvalidate" id="login-input-of-login" pattern="^\S+ \S+$">
             </label>
           </div>
           <div class="input-wrp">
             <label for="password-input-of-login" class="input-title">Password</label>
-            <input
+            <input name="pass"
               title="User password must contain at least 8 characters, uppercase and lowercase letters, and numbers"
               id="password-input-of-login" type="password" class="input unvalidate"
               pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
@@ -58,12 +58,12 @@
           <div class="input-wrp">
             <label for="login-input-of-signup" class="input-title">Login</label>
             <label>
-              <input id="login-input-of-signup" type="text" class="input unvalidate" pattern="^\S+ \S+$">
+              <input name="name" id="login-input-of-signup" type="text" class="input unvalidate" pattern="^\S+ \S+$">
             </label>
           </div>
           <div class="input-wrp confirm-pass-wrp">
             <label for="password-confirm-of-signup" class="input-title">Confirm Password</label>
-            <input disabled id="password-confirm-of-signup" type="password" class="input unvalidate"
+            <input name="pass" disabled id="password-confirm-of-signup" type="password" class="input unvalidate"
               pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z0-9]{8,}">
           </div>
           <div class="input-wrp pass-wrp">
@@ -97,7 +97,7 @@
     <div class="log-part">
       <button class="login-btn link-to-login-widow">Log In</button>
       <nav class="author-capabil hide">
-        <button title="Log Out" class="capabil-btn">
+        <button onclick="chatApi.logOut()" title="Log Out" class="capabil-btn">
           <label for="log-out">
             <input id="log-out" type="radio" name="capabil" />
             <svg class="capabil-icon" width="35" height="35" viewBox="0 0 35 35" fill="none"
@@ -349,8 +349,8 @@
 
       </div>
       <form id="text-send-block" action="#">
-        <textarea autofocus autocomplete="off" id="text-send-input" placeholder="Type a message here..."></textarea>
-        <button id="submit-btn" type="submit"></button>
+        <textarea autofocus autocomplete="off" id="text-send-input" placeholder="Log In to send messages..."></textarea>
+        <button id="submit-btn" type="submit" disabled></button>
         <button id="edit-btn" class="hide" type="button"></button>
       </form>
     </section>
@@ -376,8 +376,9 @@
         </div>
       </div>
       <ul class="mobile-menu-list mobile-menu-list_signed">
-        <li><button class="to-direct">Direct</button></li>
-        <li> <button class="to-main-window">Main Chat</button></li>
+        <li><button class="to-direct" onclick="controller.personalChatsView()">Direct</button></li>
+        <li> <button class="to-main-window" onclick="mobileToMainChat(),controller.showMessages()">Main Chat</button>
+        </li>
         <li> <button class="to-online-users">Online Users</button> </li>
         <li> <button class="sign-out-btn"> Sign Out</button></li>
       </ul>
@@ -396,8 +397,11 @@
 
     </nav>
   </section>
-  <script src="../allLogic.js"></script>
+
   <script src="./script.js"></script>
+  <script src="../view.js"></script>
+  <script src="../chatApi.js"></script>
+  <script src="../allLogic.js"></script>
 
 </body>
 
